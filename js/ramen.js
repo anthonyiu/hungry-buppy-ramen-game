@@ -1,5 +1,6 @@
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const alphabet = document.getElementById("alphabet");
+const keyboard = document.getElementById("keyboard");
+const message = document.getElementById("message");
 const passwordBoard = [
   "Aeroplane",
   "Dinosaur",
@@ -44,19 +45,16 @@ const passwordBoard = [
   "Spring",
 ];
 const passwordDiv = document.querySelector("#board");
-const imgDiv = document.querySelector("#hangin-dude");
+const imgDiv = document.querySelector("#buppyRamen");
+const coins = document.querySelector("#coin-remain");
 const random = Math.floor(Math.random() * passwordBoard.length);
 const password = passwordBoard[random];
-// const yes = new Audio("yes.wav");
-// const no = new Audio("no.wav");
-// const win = new Audio("nice-work.wav");
-// const lose = new Audio("oh-my-god-1.wav");
 let fail = 0;
 let countDown;
 const start = function () {
   letters.split("").forEach((letter) => {
     const html = `<div class="letter">${letter}</div>`;
-    alphabet.insertAdjacentHTML("beforeend", html);
+    keyboard.insertAdjacentHTML("beforeend", html);
   });
   showPassword();
   showHangman(fail);
@@ -100,35 +98,35 @@ const checkForLetter = function (e) {
       //   no.play();
       fail++;
       showHangman(fail);
+      coins.innerHTML = 6 - fail;
       deactivateLetter(false, e.target);
     }
     if (fail == 6) {
       finish(false);
-      passwordDiv.classList.add("lost");
     }
     if (password.toUpperCase() === passwordDashed.join("")) {
       finish(true);
-      passwordDiv.classList.add("won");
     }
   }
 };
-alphabet.addEventListener("click", checkForLetter);
+keyboard.addEventListener("click", checkForLetter);
 const deactivateLetter = function (hit, letter, audio) {
   letter.className = hit ? "letter hit" : "letter not-hit";
 };
 const finish = function (success) {
   if (success) {
-    alphabet.innerHTML = `<h1 class="won"><br>WELL DONE!</h1><div class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> PLAY AGAIN</div>`;
-    // win.play();
+    message.innerHTML = `<h1 class="won">WELL DONE!</h1><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> PLAY AGAIN</a>`;
+    passwordDiv.classList.add("won");
+    imgDiv.classList.add("won");
     clearInterval(countDown);
   } else {
-    alphabet.innerHTML = `<h1 class="lost"><br>YOU LOST!</h1>
-    <div class="answer">The answer is: <br><span class="password">${password}</span></div><div class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</div>`;
-    // lose.play();
+    message.innerHTML = `<h1 class="lost">YOU LOST!</h1>
+    <div class="answer">The answer is: <br><span class="password">${password}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
+    passwordDiv.classList.add("lost");
     clearInterval(countDown);
   }
   document
-    .querySelector(".btn")
+    .querySelector("a.btn")
     .addEventListener("click", () => location.reload());
 };
 const timer = function () {
