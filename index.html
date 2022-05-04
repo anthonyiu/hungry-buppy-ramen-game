@@ -26,17 +26,15 @@
   </head>
   <body class="flex-container">
     <header class="flex-item">
-      <div class="menu-left">
-        <i class="fa-solid fa-bars"></i>
-        <!-- <a class="about" href="#about-modal">!</a>
-        <a class="how-to" href="#how-to-modal">?</a> -->
+      <div class="header-left">
+        <a href="#menu"><i class="fa-solid fa-bars"></i></a>
       </div>
       <div class="title">
         Hungry&nbsp;Buppy&nbsp;NFT<br />
         <span class="subtitle">-&nbsp;The&nbsp;Ramen&nbsp;Game&nbsp;-</span>
       </div>
 
-      <div class="menu-right">
+      <div class="header-right">
         <div id="timer" class="timer">0:00:00</div>
         <div id="coins">C x 0</div>
       </div>
@@ -83,7 +81,27 @@
         <div id="keyboard"></div>
       </div>
     </footer>
-    <div id="about-modal" class="modal-window">
+    <nav id="menu" class="overlay">
+      <div>
+        <a href="#" title="Close" class="menu-close">X</a>
+        <div class="menu-title">Menu</div>
+        <ul>
+          <li>
+            <a class="how-to" href="#how-to-modal">? How to Play</a>
+          </li>
+          <li><a class="about" href="#about-modal">! About the Game</a></li>
+        </ul>
+
+        <div class="menu-title">Menu</div>
+        <ul>
+          <li>
+            <a class="how-to" href="#how-to-modal">? How to Play</a>
+          </li>
+          <li><a class="about" href="#about-modal">! About the Game</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div id="about-modal" class="modal-window overlay">
       <div>
         <a href="#" title="Close" class="modal-close">X</a>
         <h1>About the Creator</h1>
@@ -98,11 +116,25 @@
         </div>
       </div>
     </div>
-    <div id="how-to-modal" class="modal-window">
+    <div id="how-to-modal" class="modal-window overlay">
       <div>
         <a href="#" title="Close" class="modal-close">X</a>
         <h1>How to Play</h1>
-        <div class="modal-content">Timer, Coin, Hangman Game</div>
+        <div class="modal-content">
+          <p>
+            Timer, Coin, Hangman Game<br />
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            officia, quisquam ratione sapiente, vitae, autem quae mollitia sunt
+            consectetur nam quo illo! Tempora illum aperiam esse illo labore
+            suscipit pariatur!
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet
+            officia, quisquam ratione sapiente, vitae, autem quae mollitia sunt
+            consectetur nam quo illo! Tempora illum aperiam esse illo labore
+            suscipit pariatur!
+          </p>
+        </div>
       </div>
     </div>
 

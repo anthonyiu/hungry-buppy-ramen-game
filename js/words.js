@@ -40,4 +40,5 @@ export const words = [
   "Summer",
   "Winter",
   "Spring",
+  "Muscle Fatigue",
 ];

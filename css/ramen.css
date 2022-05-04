@@ -3,6 +3,8 @@
   --green: #00b195;
   --blue: #016596;
   --red: #d58282;
+  --dark-blue: #003c5a;
+  --dark-blue-tint: #194f6a;
   --bg: #8de2df;
   --header-height: 80px;
   --footer-height: 220px;
@@ -49,14 +51,14 @@ body {
 
 header {
   background-color: var(--blue);
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.5rem;
 
   flex-wrap: nowrap;
   font-size: 1rem;
   height: var(--header-height);
 }
 
-.menu-left {
+.header-left {
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -68,17 +70,12 @@ header {
   color: #ffffff;
 }
 
-.menu-left > a {
-  border: 2px solid #ffffff;
-  border-radius: 0.8rem;
-  padding: 8px 5px 5px 8px;
+.header-left > a {
   color: #ffffff;
   text-decoration: none;
 }
 
-.menu-left > a:hover {
-  background-color: #ffffff;
-  color: var(--blue);
+.header-left > a:hover {
   cursor: pointer;
 }
 
@@ -102,7 +99,7 @@ header {
   color: #ffffff;
 }
 
-.menu-right {
+.header-right {
   display: flex;
   justify-content: flex-end;
   align-items: flex-end;
@@ -114,7 +111,7 @@ header {
   flex: 0 0 70px;
 }
 
-.menu-right > div {
+.header-right > div {
   text-align: center;
   line-height: 1em;
   padding: 0.5em 1em 0.3em;
@@ -147,9 +144,6 @@ header {
 
 main {
   flex: 8 1 250px;
-}
-
-main > .container {
 }
 
 #buppyRamen {
@@ -249,8 +243,10 @@ main > .container {
   background-color: var(--blue);
   text-transform: uppercase;
   text-align: center;
-  padding: 2rem 1rem 1rem;
-  /* border-radius: 5rem; */
+  padding: 2rem 1rem;
+  border-radius: 5rem;
+  margin: 0 5rem;
+  line-height: 1.2em;
 }
 
 #board.won {
@@ -347,18 +343,100 @@ footer .btn:hover {
   animation-iteration-count: infinite;
 }
 
-/* Modal */
-.modal-window {
+.overlay {
   position: fixed;
   background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 999;
   visibility: hidden;
   opacity: 0;
   pointer-events: none;
+}
+
+/* Nav */
+
+nav {
+  z-index: 800;
+  transition: all 0.8s;
+}
+
+nav > div {
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  max-width: 100%;
+  height: 100%;
+  background-color: var(--dark-blue);
+  z-index: 888;
+  /* transform: translate(-50%, -50%); */
+  /* pointer-events: none; */
+
+  box-shadow: rgba(22, 22, 22, 0.48) 6px 2px 16px 0px,
+    rgba(0, 0, 0, 0.8) -6px -2px 16px 0px;
+  transition: all 0.8s;
+  overflow-y: auto;
+}
+
+nav:target {
+  visibility: visible;
+  opacity: 1;
+
+  pointer-events: auto;
+}
+
+nav:target > div {
+  left: 0;
+}
+
+nav .menu-title {
+  color: var(--yellow);
+  padding: 3rem 2rem 1rem;
+  border-bottom: 1px solid var(--yellow);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li a {
+  margin: 0;
+  list-style: none;
+  display: block;
+  padding: 1.5rem 2rem;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+nav li:hover {
+  background-color: var(--dark-blue-tint);
+}
+
+.menu-close {
+  color: var(--yellow);
+  cursor: pointer;
+  font-size: 80%;
+  position: absolute;
+  right: 2rem;
+  text-align: center;
+  top: 3rem;
+  /* width: 70px; */
+  text-decoration: none;
+}
+
+.menu-close:hover {
+  color: var(--dark-blue-tint);
+}
+
+/* Modal */
+.modal-window {
+  z-index: 999;
+
   transition: all 0.3s;
 }
 
@@ -378,6 +456,8 @@ footer .btn:hover {
   transform: translate(-50%, -50%);
   padding: 2em;
   background: var(--yellow);
+  overflow-y: auto;
+  max-height: 80%;
 }
 .modal-window header {
   font-weight: bold;
@@ -390,7 +470,7 @@ footer .btn:hover {
 }
 
 .modal-close {
-  color: #555555;
+  color: var(--dark-blue-tint);
   line-height: 50px;
   font-size: 80%;
   position: absolute;
@@ -402,10 +482,6 @@ footer .btn:hover {
 }
 .modal-close:hover {
   color: #aaaaaa;
-}
-
-.modal-window > div {
-  border-radius: 1rem;
 }
 
 .modal-window div:not(:last-of-type) {
@@ -488,7 +564,7 @@ footer .btn:hover {
     flex-wrap: wrap;
   }
 
-  .menu-left {
+  .header-left {
     flex-basis: 1em;
   }
 
@@ -496,7 +572,7 @@ footer .btn:hover {
     margin-left: -1em;
   }
 
-  .menu-right {
+  .header-right {
     flex-direction: row;
     justify-content: space-evenly;
     align-items: stretch;
@@ -505,7 +581,7 @@ footer .btn:hover {
     margin: 5px 0 0 0;
   }
 
-  .menu-right > div {
+  .header-right > div {
     flex-basis: 100px;
   }
 

@@ -7,20 +7,30 @@ const timer = document.querySelector("#timer");
 const passwordDiv = document.querySelector("#board");
 
 const coins = document.querySelector("#coins");
+
+const displayToggle = (e, block) => {
+  e.style.display = block ? "block" : "none";
+};
+
 const random = Math.floor(Math.random() * words.length);
 const password = words[random];
 let fail = 0;
 let countDown;
 const start = function () {
   letters.split("").forEach((letter) => {
-    const html = `<div class="letter">${letter}</div>`;
+    const html = `<div class="letter unhit">${letter}</div>`;
     keyboard.insertAdjacentHTML("beforeend", html);
   });
   showPassword();
   showEyes(fail);
   showCoins(fail);
 };
-window.onload = start;
+window.onload = (e) => {
+  start();
+  // console.log(document.querySelectorAll(".letter.unhit"));
+  const allLetters = document.querySelectorAll(".letter.unhit");
+  allLetters.forEach((e) => e.addEventListener("click", checkForLetter));
+};
 const passwordDashed = password.split("").map((letter) => {
   if (letter === " ") return " ";
   else if (letter === "’") return "’";
@@ -37,19 +47,16 @@ const showCoins = (e) => {
 };
 
 const deductFood = (e) => {
-  document.querySelector(`#food${e}`).style.display = "none";
+  displayToggle(document.querySelector(`#food${e}`), false);
 };
+
 const showPassword = function () {
   passwordDiv.innerHTML = passwordDashed.join("");
 };
-const showEyes = function (e) {
-  if (e > 0) {
-    document.querySelector(`#eyes${e - 1}`).style.display = "none";
-  }
-  if (e == "won") {
-    document.querySelector(`#eyes${fail - 1}`).style.display = "none";
-  }
-  document.querySelector(`#eyes${e}`).style.display = "block";
+
+const showEyes = (e) => {
+  document.querySelectorAll(".eyes").forEach((e) => displayToggle(e, false));
+  displayToggle(document.querySelector(`#eyes${e}`), true);
 };
 
 const checkForLetter = function (e) {
@@ -88,10 +95,12 @@ const checkForLetter = function (e) {
     }
   }
 };
-keyboard.addEventListener("click", checkForLetter);
-const deactivateLetter = function (hit, letter, audio) {
+
+const deactivateLetter = function (hit, letter) {
   letter.className = hit ? "letter hit" : "letter not-hit";
+  letter.removeEventListener("click", checkForLetter);
 };
+
 const finish = function (success) {
   if (success) {
     message.innerHTML = `<h1 class="won">WELL DONE!</h1><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> PLAY AGAIN</a>`;
@@ -115,7 +124,8 @@ const finish = function (success) {
     .addEventListener("click", () => location.reload());
 };
 const timerCount = function () {
-  let time = new Date(300000);
+  //Change time limit here
+  let time = new Date(200000);
   const options = {
     minute: "2-digit",
     second: "2-digit",
@@ -130,8 +140,17 @@ const timerCount = function () {
       finish(false);
       clearInterval(countDown);
 
-      // all eyes off but 6 on, all food off
+      // all eyes off but Eyes6 on
+
+      document
+        .querySelectorAll(".eyes")
+        .forEach((e) => displayToggle(e, false));
       showEyes(6);
+
+      // all food off
+      document
+        .querySelectorAll("img[src^='img/food']")
+        .forEach((e) => displayToggle(e, false));
     }
   };
   tick();
@@ -139,3 +158,10 @@ const timerCount = function () {
   return countDown;
 };
 timerCount();
+
+const clickToHash = document.querySelectorAll(".overlay");
+clickToHash.forEach((e) =>
+  e.addEventListener("click", function () {
+    location.href = "#";
+  })
+);
