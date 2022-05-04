@@ -19,13 +19,6 @@
 
     <link href="css/ramen.css" rel="stylesheet" />
 
-    <link rel="preload" href="img/0.png" as="image" />
-    <link rel="preload" href="img/1.png" as="image" />
-    <link rel="preload" href="img/2.png" as="image" />
-    <link rel="preload" href="img/3.png" as="image" />
-    <link rel="preload" href="img/4.png" as="image" />
-    <link rel="preload" href="img/5.png" as="image" />
-    <link rel="preload" href="img/6.png" as="image" />
     <script
       src="https://kit.fontawesome.com/7053c90460.js"
       crossorigin="anonymous"
@@ -34,8 +27,9 @@
   <body class="flex-container">
     <header class="flex-item">
       <div class="menu-left">
-        <a class="about" href="#about-modal">!</a>
-        <a class="how-to" href="#how-to-modal">?</a>
+        <i class="fa-solid fa-bars"></i>
+        <!-- <a class="about" href="#about-modal">!</a>
+        <a class="how-to" href="#how-to-modal">?</a> -->
       </div>
       <div class="title">
         Hungry&nbsp;Buppy&nbsp;NFT<br />
@@ -44,18 +38,48 @@
 
       <div class="menu-right">
         <div id="timer" class="timer">0:00:00</div>
-        <div id="coin">C x <span id="coin-remain">6</span></div>
+        <div id="coins">C x 0</div>
       </div>
     </header>
     <main class="flex-item">
       <div class="container">
-        <div id="buppyRamen"></div>
-        <div id="message"></div>
+        <div id="buppyRamen">
+          <img class="eyes" id="eyes0" src="img/eyes/eyes0.png" alt="Eyes 0" />
+          <img class="eyes" id="eyes1" src="img/eyes/eyes1.png" alt="Eyes 1" />
+          <img class="eyes" id="eyes2" src="img/eyes/eyes2.png" alt="Eyes 2" />
+          <img class="eyes" id="eyes3" src="img/eyes/eyes3.png" alt="Eyes 3" />
+          <img class="eyes" id="eyes4" src="img/eyes/eyes4.png" alt="Eyes 4" />
+          <img class="eyes" id="eyes5" src="img/eyes/eyes5.png" alt="Eyes 5" />
+          <img
+            class="eyes"
+            id="eyes6"
+            src="img/eyes/eyes6.png"
+            alt="Eyes Lost"
+          />
+          <img
+            class="eyes"
+            id="eyeswon"
+            src="img/eyes/eyeswon.png"
+            alt="Eyes Win"
+          />
+
+          <img class="food2" id="food1" src="img/food/food1.png" alt="Food 1" />
+          <img class="food2" id="food2" src="img/food/food2.png" alt="Food 2" />
+          <img class="food2" id="food3" src="img/food/food3.png" alt="Food 3" />
+          <img class="food1" id="food4" src="img/food/food4.png" alt="Food 4" />
+          <img class="food1" id="food5" src="img/food/food5.png" alt="Food 5" />
+          <img class="food1" id="food6" src="img/food/food6.png" alt="Food 6" />
+
+          <img id="bodyTable" src="img/body_table.png" alt="Body and Table" />
+
+          <img id="ramenBg" src="img/board_bg.png" alt="Background" />
+        </div>
       </div>
     </main>
     <footer class="flex-item">
       <div class="container">
         <div id="board"></div>
+        <div id="message"></div>
         <div id="keyboard"></div>
       </div>
     </footer>
@@ -82,6 +106,6 @@
       </div>
     </div>
 
-    <script type="text/javascript" src="js/ramen.js"></script>
+    <script src="js/ramen.js" type="module"></script>
   </body>
 </html>
