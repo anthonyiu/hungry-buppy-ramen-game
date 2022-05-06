@@ -20,6 +20,20 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #222222;
+  border-radius: 100px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -32,6 +46,10 @@ body {
   background-position: 10px 100px;
   background-attachment: fixed;
   background-color: var(--bg);
+
+  scrollbar-width: auto;
+  scrollbar-color: #222222 #e4e4e4;
+  scrollbar-gutter: stable;
 }
 
 .flex-container {
@@ -73,10 +91,14 @@ header {
 .header-left > a {
   color: #ffffff;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .header-left > a:hover {
   cursor: pointer;
+  color: var(--yellow);
 }
 
 .about {
@@ -396,6 +418,7 @@ nav .menu-title {
   color: var(--yellow);
   padding: 3rem 2rem 1rem;
   border-bottom: 1px solid var(--yellow);
+  text-transform: uppercase;
 }
 
 nav ul {
@@ -411,6 +434,18 @@ nav li a {
   padding: 1.5rem 2rem;
   color: #ffffff;
   text-decoration: none;
+}
+
+nav li a i {
+  font-size: 140%;
+  margin-left: -5px;
+  margin-right: -1.5px;
+}
+
+nav li a img {
+  width: 1.4rem;
+  margin-left: -5px;
+  margin-right: -1.5px;
 }
 
 nav li:hover {
@@ -459,6 +494,7 @@ nav li:hover {
   overflow-y: auto;
   max-height: 80%;
 }
+
 .modal-window header {
   font-weight: bold;
 }
@@ -538,9 +574,9 @@ nav li:hover {
     --ramen-img-padding: 0.8rem;
   }
 
-  header {
+  /* header {
     font-size: 0.8rem;
-  }
+  } */
 
   .modal-window > div {
     width: 80vw;
