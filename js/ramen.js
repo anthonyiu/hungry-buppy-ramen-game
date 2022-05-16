@@ -18,7 +18,7 @@ let fail = 0;
 let countDown;
 const start = function () {
   letters.split("").forEach((letter) => {
-    const html = `<div class="letter unhit">${letter}</div>`;
+    const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
     keyboard.insertAdjacentHTML("beforeend", html);
   });
   showPassword();
@@ -29,7 +29,15 @@ window.onload = (e) => {
   start();
   // console.log(document.querySelectorAll(".letter.unhit"));
   const allLetters = document.querySelectorAll(".letter.unhit");
-  allLetters.forEach((e) => e.addEventListener("click", checkForLetter));
+  allLetters.forEach((e) =>
+    e.addEventListener("click", (input) => {
+      checkForLetter(input.target.textContent);
+    })
+  );
+
+  document.addEventListener("keyup", (input) => {
+    checkForLetter(input.key.toUpperCase());
+  });
 };
 const passwordDashed = password.split("").map((letter) => {
   if (letter === " ") return " ";
@@ -60,18 +68,19 @@ const showEyes = (e) => {
 };
 
 const checkForLetter = function (e) {
-  if (e.target.classList.contains("letter")) {
-    if (password.toUpperCase().split("").includes(e.target.textContent)) {
+  let pressedLetter = document.querySelector(`#letter${e}`);
+  if (pressedLetter.classList.contains("unhit")) {
+    if (password.toUpperCase().split("").includes(e)) {
       password
         .toUpperCase()
         .split("")
         .forEach((letter, i, arr) => {
-          if (letter === e.target.textContent) {
+          if (letter === e) {
             passwordDashed[i] = letter;
             showPassword();
           }
         });
-      deactivateLetter(true, e.target);
+      deactivateLetter(true, pressedLetter);
     } else {
       fail++;
       showEyes(fail);
@@ -85,7 +94,7 @@ const checkForLetter = function (e) {
         coins.classList.remove("shake");
       }, 300);
 
-      deactivateLetter(false, e.target);
+      deactivateLetter(false, pressedLetter);
     }
     if (fail == 6) {
       finish(false);
@@ -96,9 +105,8 @@ const checkForLetter = function (e) {
   }
 };
 
-const deactivateLetter = function (hit, letter) {
-  letter.className = hit ? "letter hit" : "letter not-hit";
-  letter.removeEventListener("click", checkForLetter);
+const deactivateLetter = function (hit, pressedLetter) {
+  pressedLetter.className = hit ? "letter hit" : "letter not-hit";
 };
 
 const finish = function (success) {
@@ -125,7 +133,7 @@ const finish = function (success) {
 };
 const timerCount = function () {
   //Change time limit here
-  let time = new Date(200000);
+  let time = new Date(300000);
   const options = {
     minute: "2-digit",
     second: "2-digit",
