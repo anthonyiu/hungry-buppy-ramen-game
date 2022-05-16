@@ -16,6 +16,8 @@ const random = Math.floor(Math.random() * words.length);
 const password = words[random];
 let fail = 0;
 let countDown;
+let gameStatus = "start";
+let keyboardStatus, coinStatus;
 const start = function () {
   letters.split("").forEach((letter) => {
     const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
@@ -25,20 +27,31 @@ const start = function () {
   showEyes(fail);
   showCoins(fail);
 };
+
 window.onload = (e) => {
   start();
-  // console.log(document.querySelectorAll(".letter.unhit"));
+  const loadLocalStorage = () => {
+    fail = window.localStorage.getItem("fail");
+    gameStatus = window.localStorage.getItem("gameStatus");
+    keyboardStatus = window.localStorage.getItem("keyboardStatus");
+    coinStatus = window.localStorage.getItem("coinStatus");
+    buppyStatus = window.localStorage.getItem("buppyStatus");
+    timerStatus = window.localStorage.getItem("timerStatus");
+    boardStatus = window.localStorage.getItem("boardStatus");
+  };
+
   const allLetters = document.querySelectorAll(".letter.unhit");
   allLetters.forEach((e) =>
     e.addEventListener("click", (input) => {
-      checkForLetter(input.target.textContent);
+      checkLetter(input.target.textContent);
     })
   );
 
   document.addEventListener("keyup", (input) => {
-    checkForLetter(input.key.toUpperCase());
+    checkLetter(input.key.toUpperCase());
   });
 };
+
 const passwordDashed = password.split("").map((letter) => {
   if (letter === " ") return " ";
   else if (letter === "’") return "’";
@@ -67,9 +80,9 @@ const showEyes = (e) => {
   displayToggle(document.querySelector(`#eyes${e}`), true);
 };
 
-const checkForLetter = function (e) {
+const checkLetter = function (e) {
   let pressedLetter = document.querySelector(`#letter${e}`);
-  if (pressedLetter.classList.contains("unhit")) {
+  if (pressedLetter.classList.contains("unhit") && gameStatus !== "finish") {
     if (password.toUpperCase().split("").includes(e)) {
       password
         .toUpperCase()
@@ -127,6 +140,7 @@ const finish = function (success) {
 
     clearInterval(countDown);
   }
+  gameStatus = "finish";
   document
     .querySelector("a.btn")
     .addEventListener("click", () => location.reload());

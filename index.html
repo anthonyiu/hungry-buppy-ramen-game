@@ -44,7 +44,7 @@
     </header>
     <main class="flex-item">
       <div class="container">
-        <div id="buppyRamen">
+        <div id="buppy">
           <img class="eyes" id="eyes0" src="img/eyes/eyes0.png" alt="Eyes 0" />
           <img class="eyes" id="eyes1" src="img/eyes/eyes1.png" alt="Eyes 1" />
           <img class="eyes" id="eyes2" src="img/eyes/eyes2.png" alt="Eyes 2" />
@@ -119,8 +119,15 @@
         <div class="menu-title">Setting</div>
         <ul>
           <li>
-            <a><i class="fa-solid fa-moon"></i> Dark Mode</a
-            ><a id="darkMode" class="on-off">ON | OFF</a>
+            <a href="#menu"
+              ><i class="fa-solid fa-moon"></i> Dark Mode<label
+                class="switch"
+                id="darkMode"
+              >
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </a>
           </li>
         </ul>
       </div>
