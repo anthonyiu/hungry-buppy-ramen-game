@@ -6,6 +6,10 @@
   --dark-blue: #004d7c;
   --dark-blue-tint: #016596;
   --bg: #a4e3ff;
+
+  --dark-mode-charcoal: #202124;
+  --dark-mode-bg: #000000;
+
   --header-height: 80px;
   --footer-height: 220px;
   --buppy-img-padding: 1rem;
@@ -120,7 +124,7 @@ body {
 
 header {
   background-color: var(--blue);
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 2rem;
 
   flex-wrap: nowrap;
   font-size: 1rem;
@@ -213,6 +217,7 @@ header {
 
 #coins.lastcoin {
   background-color: var(--red);
+  color: #ffffff;
 }
 
 main {
@@ -349,7 +354,7 @@ footer .btn:active {
 
 #message h1.won {
   color: var(--green);
-  padding: 1em 0;
+  padding: 2em 0;
 }
 
 #message h1.lost {
@@ -379,20 +384,20 @@ footer .btn:active {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--blue);
   text-transform: uppercase;
   text-align: center;
-  padding: 0.8em 0.3em;
+  padding: 0;
   margin: 0 5rem;
   line-height: 1.2em;
 }
 
-#board.won {
+#board > span.won {
   background-color: var(--green);
   color: #ffffff;
+  padding: 2px 2px 2px 8px;
 }
 
-#board.lost,
+#board > span.lost,
 #keyboard.lost,
 #keyboard.won {
   display: none;
@@ -457,7 +462,7 @@ footer .btn:active {
 
 .overlay {
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
   top: 0;
   right: 0;
   bottom: 0;
@@ -489,7 +494,7 @@ nav > div {
 
   box-shadow: rgba(22, 22, 22, 0.48) 6px 2px 16px 0px,
     rgba(0, 0, 0, 0.8) -6px -2px 16px 0px;
-  transition: all 0.8s;
+  transition: opacity 0.8s, left 0.8s;
   overflow-y: auto;
 }
 
@@ -533,6 +538,7 @@ nav li label.switch {
   position: absolute;
   right: 0.6em;
   top: 0.8em;
+  pointer-events: none;
 }
 
 nav li a i {
@@ -632,6 +638,61 @@ nav li:hover {
   font-family: "Poppins", sans-serif;
   color: #222222;
   font-size: 1.2rem;
+}
+
+/* Dark Mode */
+
+body.darkmode {
+  background-color: var(--dark-mode-bg);
+}
+
+body.darkmode header,
+body.darkmode nav > div,
+body.darkmode footer {
+  background-color: var(--dark-mode-charcoal);
+}
+
+body.darkmode .letter {
+  background-color: var(--dark-mode-charcoal);
+  color: #ffffff;
+}
+
+body.darkmode .letter.hit {
+  background-color: var(--green);
+}
+
+body.darkmode .letter.not-hit {
+  background-color: var(--red);
+}
+
+body.darkmode #coins {
+  background-color: #555555;
+  color: #ffffff;
+}
+
+body.darkmode #coins.lastcoin {
+  background-color: var(--red);
+  color: var(--dark-mode-charcoal);
+}
+
+body.darkmode .modal-window > div {
+  background-color: var(--dark-mode-charcoal);
+}
+
+body.darkmode .modal-window h1 {
+  color: var(--yellow);
+}
+
+body.darkmode .modal-content {
+  color: #ffffff;
+}
+
+body.darkmode .modal-close {
+  color: #ffffff;
+}
+
+body.darkmode .modal-close:hover {
+  color: #cccccc;
 }
 
 @keyframes shake {

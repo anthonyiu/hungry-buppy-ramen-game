@@ -2,28 +2,41 @@ import { words } from "../js/words.js";
 
 // Menu
 
-const toggleMenu = () => {
+const menuToggle = () => {
   let menu = document.querySelector("#menu");
   menu.classList.toggle("active");
 };
 
 const menuOpen = document.querySelector("#menuOpen");
-menuOpen.addEventListener("click", toggleMenu);
+menuOpen.addEventListener("click", menuToggle);
 
 const menuClose = document.querySelector("#menuClose");
-menuClose.addEventListener("click", toggleMenu);
+menuClose.addEventListener("click", menuToggle);
 
 // Darkmode Toggle
 
+let darkmodeStatus = false;
+
 const darkmodeSwitch = document.querySelector("#darkmodeSwitch");
 
-const toggleDarkMode = () => {
+const darkmodeToggle = (status) => {
   let input = darkmodeSwitch.querySelector("label input");
-
-  input.checked = !input.checked;
+  if (status) {
+    input.checked = true;
+    document.body.classList.add("darkmode");
+    darkmodeStatus = true;
+    window.localStorage.setItem("darkmodeStatus", true);
+  } else {
+    input.checked = false;
+    document.body.classList.remove("darkmode");
+    darkmodeStatus = false;
+    window.localStorage.setItem("darkmodeStatus", false);
+  }
 };
 
-darkmodeSwitch.addEventListener("click", toggleDarkMode);
+darkmodeSwitch.addEventListener("click", () => {
+  darkmodeToggle(!darkmodeStatus);
+});
 
 // Game Core
 
@@ -31,7 +44,7 @@ let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const keyboard = document.getElementById("keyboard");
 const message = document.getElementById("message");
 const timer = document.querySelector("#timer");
-const passwordDiv = document.querySelector("#board");
+const board = document.querySelector("#board > span");
 
 const coins = document.querySelector("#coins");
 
@@ -55,17 +68,22 @@ const start = function () {
   showCoins(fail);
 };
 
-window.onload = (e) => {
+document.addEventListener("DOMContentLoaded", () => {
   start();
   const loadLocalStorage = () => {
-    fail = window.localStorage.getItem("fail");
-    gameStatus = window.localStorage.getItem("gameStatus");
-    keyboardStatus = window.localStorage.getItem("keyboardStatus");
-    coinStatus = window.localStorage.getItem("coinStatus");
-    buppyStatus = window.localStorage.getItem("buppyStatus");
-    timerStatus = window.localStorage.getItem("timerStatus");
-    boardStatus = window.localStorage.getItem("boardStatus");
+    darkmodeStatus =
+      window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
+    darkmodeToggle(darkmodeStatus);
+    // fail = window.localStorage.getItem("fail");
+    // gameStatus = window.localStorage.getItem("gameStatus");
+    // keyboardStatus = window.localStorage.getItem("keyboardStatus");
+    // coinStatus = window.localStorage.getItem("coinStatus");
+    // buppyStatus = window.localStorage.getItem("buppyStatus");
+    // timerStatus = window.localStorage.getItem("timerStatus");
+    // boardStatus = window.localStorage.getItem("boardStatus");
   };
+
+  loadLocalStorage();
 
   const allLetters = document.querySelectorAll(".letter.unhit");
   allLetters.forEach((e) =>
@@ -77,7 +95,7 @@ window.onload = (e) => {
   document.addEventListener("keyup", (input) => {
     checkLetter(input.key.toUpperCase());
   });
-};
+});
 
 const passwordDashed = password.split("").map((letter) => {
   if (letter === " ") return " ";
@@ -99,7 +117,7 @@ const deductFood = (e) => {
 };
 
 const showPassword = function () {
-  passwordDiv.innerHTML = passwordDashed.join("");
+  board.innerHTML = passwordDashed.join("");
 };
 
 const showEyes = (e) => {
@@ -153,7 +171,7 @@ const finish = function (success) {
   if (success) {
     message.innerHTML = `<h1 class="won">WELL DONE!</h1><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> PLAY AGAIN</a>`;
 
-    passwordDiv.classList.add("won");
+    board.classList.add("won");
     keyboard.classList.add("won");
     showEyes("won");
 
@@ -163,7 +181,7 @@ const finish = function (success) {
     <div class="answer">The answer is: <br><span class="password">${password}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
 
     keyboard.classList.add("lost");
-    passwordDiv.classList.add("lost");
+    board.classList.add("lost");
 
     clearInterval(countDown);
   }
@@ -208,9 +226,9 @@ const timerCount = function () {
 };
 timerCount();
 
-// const clickToHash = document.querySelectorAll(".overlay");
-// clickToHash.forEach((e) =>
-//   e.addEventListener("click", function () {
-//     location.href = "#";
-//   })
-// );
+const clickToHash = document.querySelectorAll(".modal-window.overlay");
+clickToHash.forEach((e) =>
+  e.addEventListener("click", function () {
+    location.href = "#";
+  })
+);
