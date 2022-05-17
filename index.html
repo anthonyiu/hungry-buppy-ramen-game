@@ -30,7 +30,7 @@
   <body class="flex-container">
     <header class="flex-item">
       <div class="header-left">
-        <a href="#menu"><i class="fa-solid fa-bars"></i></a>
+        <a id="menuOpen" href="#"><i class="fa-solid fa-bars"></i></a>
       </div>
       <div class="title">
         Hungry&nbsp;Buppy&nbsp;NFT<br />
@@ -86,7 +86,7 @@
     </footer>
     <nav id="menu" class="overlay">
       <div>
-        <a href="#" title="Close" class="menu-close">X</a>
+        <a id="menuClose" href="#" title="Close" class="menu-close">X</a>
         <div class="menu-title">Menu</div>
         <ul>
           <li>
@@ -119,11 +119,8 @@
         <div class="menu-title">Setting</div>
         <ul>
           <li>
-            <a href="#menu"
-              ><i class="fa-solid fa-moon"></i> Dark Mode<label
-                class="switch"
-                id="darkMode"
-              >
+            <a id="darkmodeSwitch"
+              ><i class="fa-solid fa-moon"></i> Dark Mode<label class="switch">
                 <input type="checkbox" />
                 <span class="slider"></span>
               </label>
@@ -134,7 +131,7 @@
     </nav>
     <div id="about-modal" class="modal-window overlay">
       <div>
-        <a href="#" title="Close" class="modal-close">X</a>
+        <a title="Close" class="modal-close">X</a>
         <h1>About the Game</h1>
         <div class="buppy-img">buppy img here</div>
         <div class="modal-content">

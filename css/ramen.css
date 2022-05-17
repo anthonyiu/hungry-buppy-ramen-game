@@ -55,8 +55,8 @@ body {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 55px;
+  height: 28px;
 }
 
 .switch input {
@@ -72,7 +72,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #999;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }
@@ -80,8 +80,8 @@ body {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 20px;
+  width: 20px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -90,11 +90,11 @@ body {
 }
 
 .switch input:checked + .slider {
-  background-color: #2196f3;
+  background-color: var(--green);
 }
 
 .switch input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+  box-shadow: 0 0 1px var(--green);
 }
 
 .switch input:checked + .slider:before {
@@ -493,14 +493,13 @@ nav > div {
   overflow-y: auto;
 }
 
-nav:target {
+nav.active {
   visibility: visible;
   opacity: 1;
-
   pointer-events: auto;
 }
 
-nav:target > div {
+nav.active > div {
   left: 0;
 }
 
@@ -532,8 +531,8 @@ nav li a {
 
 nav li label.switch {
   position: absolute;
-  right: 0;
-  top: 0.4em;
+  right: 0.6em;
+  top: 0.8em;
 }
 
 nav li a i {
@@ -550,6 +549,10 @@ nav li a img {
 
 nav li:hover {
   background-color: var(--dark-blue-tint);
+}
+
+#darkmodeSwitch {
+  cursor: pointer;
 }
 
 .menu-close {

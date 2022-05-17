@@ -1,5 +1,32 @@
 import { words } from "../js/words.js";
 
+// Menu
+
+const toggleMenu = () => {
+  let menu = document.querySelector("#menu");
+  menu.classList.toggle("active");
+};
+
+const menuOpen = document.querySelector("#menuOpen");
+menuOpen.addEventListener("click", toggleMenu);
+
+const menuClose = document.querySelector("#menuClose");
+menuClose.addEventListener("click", toggleMenu);
+
+// Darkmode Toggle
+
+const darkmodeSwitch = document.querySelector("#darkmodeSwitch");
+
+const toggleDarkMode = () => {
+  let input = darkmodeSwitch.querySelector("label input");
+
+  input.checked = !input.checked;
+};
+
+darkmodeSwitch.addEventListener("click", toggleDarkMode);
+
+// Game Core
+
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const keyboard = document.getElementById("keyboard");
 const message = document.getElementById("message");
@@ -181,9 +208,9 @@ const timerCount = function () {
 };
 timerCount();
 
-const clickToHash = document.querySelectorAll(".overlay");
-clickToHash.forEach((e) =>
-  e.addEventListener("click", function () {
-    location.href = "#";
-  })
-);
+// const clickToHash = document.querySelectorAll(".overlay");
+// clickToHash.forEach((e) =>
+//   e.addEventListener("click", function () {
+//     location.href = "#";
+//   })
+// );
