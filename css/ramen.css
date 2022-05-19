@@ -139,7 +139,7 @@ header {
 
   font-size: 2em;
 
-  flex: 0 0 70px;
+  flex: 0 0 120px;
   color: #ffffff;
 }
 
@@ -149,6 +149,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10;
 }
 
 .header-left > a:hover {
@@ -178,20 +179,23 @@ header {
 
 .header-right {
   display: flex;
+  flex-wrap: wrap;
+  flex: 0 0 120px;
   justify-content: flex-end;
   align-items: flex-end;
 
   font-size: 1em;
   color: var(--yellow);
-  flex-direction: column;
-
-  flex: 0 0 70px;
+  /* flex-direction: column; */
 }
 
 .header-right > div {
-  text-align: center;
+  display: flex;
+  flex: 1 1 120px;
+  justify-content: center;
   line-height: 1em;
   padding: 0.5em 1em 0.3em;
+  text-align: center;
 }
 
 .container {
@@ -453,6 +457,7 @@ footer .btn:active {
 /* Shaking Animation */
 
 .shake {
+  /* transform: scale(5); */
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s;
 
@@ -783,12 +788,12 @@ body.darkmode .modal-close:hover {
     --buppy-img-padding: 0.8rem;
   }
 
-  /* header {
-    font-size: 0.8rem;
-  } */
-
   .modal-window > div {
     width: 80vw;
+  }
+
+  .header-right > div {
+    flex: 1 1 50vw;
   }
 
   footer {
@@ -799,6 +804,27 @@ body.darkmode .modal-close:hover {
   }
 }
 
+@media screen and (max-width: 940px) {
+  header {
+    flex-wrap: wrap;
+    padding-bottom: 0;
+  }
+
+  .header-left {
+    flex-basis: 1em;
+    align-self: stretch;
+  }
+  .title {
+    margin-left: -1em;
+    align-self: flex-end;
+  }
+
+  .header-right {
+    flex: 1 0 100vw;
+    align-self: flex-end;
+  }
+}
+
 @media screen and (max-width: 520px) {
   :root {
     --buppy-img-padding: 0.5rem;
@@ -806,29 +832,16 @@ body.darkmode .modal-close:hover {
 
   header {
     font-size: 0.8rem;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
   }
 
-  .header-left {
-    flex-basis: 1em;
-  }
-
-  .title {
-    margin-left: -1em;
-  }
-
-  .header-right {
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: stretch;
-    flex-grow: 1;
-    flex-basis: 50vw;
-    margin: 5px 0 0 0;
+  /* .header-right {
+    flex: 1 0 100vw;
   }
 
   .header-right > div {
-    flex-basis: 100px;
-  }
+    flex: 1 1 50vw;
+  } */
 
   .modal-window > div {
     width: 80vw;

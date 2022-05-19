@@ -1,4 +1,4 @@
-import { words } from "../js/words.js";
+import { currentWord } from "../js/words.js";
 
 // Menu
 
@@ -52,8 +52,9 @@ const displayToggle = (e, block) => {
   e.style.display = block ? "block" : "none";
 };
 
-const random = Math.floor(Math.random() * words.length);
-const password = words[random];
+// const random = Math.floor(Math.random() * words.length);
+// const password = words[random];
+// const password = currentWord;
 let fail = 0;
 let countDown;
 let gameStatus = "start";
@@ -97,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const passwordDashed = password.split("").map((letter) => {
+const currentWordDashed = currentWord.split("").map((letter) => {
   if (letter === " ") return " ";
   else if (letter === "’") return "’";
   else if (letter === ",") return ",";
@@ -105,7 +106,7 @@ const passwordDashed = password.split("").map((letter) => {
 });
 
 const showCoins = (e) => {
-  coins.innerHTML = `C x ${6 - e}`;
+  coins.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${6 - e}`;
 
   if (6 - e == 1) {
     coins.classList.add("lastcoin");
@@ -117,7 +118,7 @@ const deductFood = (e) => {
 };
 
 const showPassword = function () {
-  board.innerHTML = passwordDashed.join("");
+  board.innerHTML = currentWordDashed.join("");
 };
 
 const showEyes = (e) => {
@@ -128,13 +129,13 @@ const showEyes = (e) => {
 const checkLetter = function (e) {
   let pressedLetter = document.querySelector(`#letter${e}`);
   if (pressedLetter.classList.contains("unhit") && gameStatus !== "finish") {
-    if (password.toUpperCase().split("").includes(e)) {
-      password
+    if (currentWord.toUpperCase().split("").includes(e)) {
+      currentWord
         .toUpperCase()
         .split("")
         .forEach((letter, i, arr) => {
           if (letter === e) {
-            passwordDashed[i] = letter;
+            currentWordDashed[i] = letter;
             showPassword();
           }
         });
@@ -150,14 +151,14 @@ const checkLetter = function (e) {
       }
       window.setTimeout(function () {
         coins.classList.remove("shake");
-      }, 300);
+      }, 3000);
 
       deactivateLetter(false, pressedLetter);
     }
     if (fail == 6) {
       finish(false);
     }
-    if (password.toUpperCase() === passwordDashed.join("")) {
+    if (currentWord.toUpperCase() === currentWordDashed.join("")) {
       finish(true);
     }
   }
@@ -178,7 +179,7 @@ const finish = function (success) {
     clearInterval(countDown);
   } else {
     message.innerHTML = `<h1 class="lost">YOU LOST!</h1>
-    <div class="answer">The answer is: <br><span class="password">${password}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
+    <div class="answer">The answer is: <br><span class="password">${currentWord}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
 
     keyboard.classList.add("lost");
     board.classList.add("lost");

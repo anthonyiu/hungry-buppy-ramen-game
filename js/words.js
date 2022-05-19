@@ -1,44 +1,21 @@
-export const words = [
-  "Aeroplane",
-  "Dinosaur",
-  "Fire Engine",
-  "Tank",
-  "Zoo",
-  "Truck",
-  "Rocket",
-  "Igloo",
-  "Book",
-  "Queen",
+const wordsAM = [
   "Tomato",
-  "Chips",
-  "Food",
-  "Plate",
-  "Pigeon",
-  "Snake",
-  "Bird",
-  "Pig",
-  "Oven",
-  "Milk",
+  "Butter",
+  "Plates",
+  "Coffee",
+  "Cereal",
+  "Apples",
+  "Banana",
   "Orange",
-  "Purple",
-  "Rabbit",
-  "Moon",
-  "Sun",
-  "Father",
-  "Mother",
-  "Door",
-  "Window",
-  "Bread",
-  "Shoes",
-  "Mouth",
-  "Mouse",
-  "King",
-  "Flower",
-  "Planet",
-  "Arrow",
-  "Money",
-  "Summer",
-  "Winter",
-  "Spring",
-  "Muscle Fatigue",
+  "Bottle",
 ];
+
+const wordsPM = ["Eating", "Dining", "Fruits", "Teabag", "Lemons", "Buffet"];
+
+const startDate = new Date("2022-05-17");
+const today = new Date();
+const gameId = today.getDate() - startDate.getDate();
+const gameDaySession = today.getHours();
+const currentWord = gameDaySession < 12 ? wordsAM[gameId] : wordsPM[gameId];
+
+export { currentWord, gameId, gameDaySession };
