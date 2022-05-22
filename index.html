@@ -7,7 +7,7 @@
       name="viewport"
       content="width=device-width, initial-scale=5.0, maximum-scale=5.0, minimum-scale=1.5"
     />
-    <title>Hungry Buppy NFT | - The Ramen Game -</title>
+    <title>Hungry Buppy NFT | - The Food Game -</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
       rel="stylesheet"
     />
 
-    <link href="css/ramen.css" rel="stylesheet" />
+    <link href="css/foodgame.css" rel="stylesheet" />
 
     <script
       src="https://kit.fontawesome.com/7053c90460.js"
@@ -34,7 +34,7 @@
       </div>
       <div class="title">
         Hungry&nbsp;Buppy&nbsp;NFT<br />
-        <span class="subtitle">-&nbsp;The&nbsp;Ramen&nbsp;Game&nbsp;-</span>
+        <span class="subtitle">-&nbsp;The&nbsp;Food&nbsp;Game&nbsp;-</span>
       </div>
 
       <div class="header-right">
@@ -90,9 +90,16 @@
         <div class="menu-title">Menu</div>
         <ul>
           <li>
-            <a class="how-to" href="#how-to-modal">? How to Play</a>
+            <a id="statOpen" href="#"
+              ><i class="fa-solid fa-chart-column fa-fw"></i>&nbsp;Stats</a
+            >
           </li>
-          <li><a class="about" href="#about-modal">! About the Game</a></li>
+          <li>
+            <a class="how-to" href="#how-to-modal">?&nbsp;How to Play</a>
+          </li>
+          <li>
+            <a class="about" href="#about-modal">!&nbsp;About the Game</a>
+          </li>
         </ul>
 
         <div class="menu-title">Find Us on</div>
@@ -101,17 +108,17 @@
             <a
               href="https://opensea.io/collection/hungry-buppy-nft"
               target="_blank"
-              ><img src="img/opensea.svg" alt="OpenSea" /> OpenSea</a
+              ><img src="img/opensea.svg" alt="OpenSea" />&nbsp;OpenSea</a
             >
           </li>
           <li>
             <a href="https://twitter.com/HungryBuppynft" target="_blank"
-              ><i class="fa-brands fa-twitter"></i> Twitter</a
+              ><i class="fa-brands fa-twitter fa-fw"></i>&nbsp;Twitter</a
             >
           </li>
           <li>
             <a href="https://www.instagram.com/hungrybuppynft/" target="_blank"
-              ><i class="fa-brands fa-instagram"></i> Instagram</a
+              ><i class="fa-brands fa-instagram fa-fw"></i>&nbsp;Instagram</a
             >
           </li>
         </ul>
@@ -120,7 +127,9 @@
         <ul>
           <li>
             <a id="darkmodeSwitch"
-              ><i class="fa-solid fa-moon"></i> Dark Mode<label class="switch">
+              ><i class="fa-solid fa-moon fa-fw"></i>&nbsp;Dark Mode<label
+                class="switch"
+              >
                 <input type="checkbox" />
                 <span class="slider"></span>
               </label>
@@ -135,11 +144,19 @@
         <h1>About the Game</h1>
         <div class="buppy-img">buppy img here</div>
         <div class="modal-content">
-          This word-guessing game is created by the team of Hungry Buppy NFT for
-          all buppy lovers and supporters. To know more about our NFT
-          collection, please visit:
-          <a href="https://linktr.ee/hungrybuppy" target="_blank"
-            >https://linktr.ee/hungrybuppy</a
+          <p>
+            Inspired by Wordle and the traditional hangman game, Hungry Buppy
+            NFT the Food Game is a word-guessing game is created by the team of
+            Hungry Buppy NFT as part of the NFT project to promote food culture
+            in the metaverse. If you love this game, show your support to us by
+            purchasing an NFT of our collection at OpeaSea.
+          </p>
+
+          <a
+            class="btn"
+            href="https://opensea.io/collection/hungry-buppy-nft"
+            target="_blank"
+            ><img src="img/opensea.svg" alt="OpenSea" />&nbsp;OpenSea</a
           >
         </div>
       </div>
@@ -166,6 +183,6 @@
       </div>
     </div>
 
-    <script src="js/ramen.js" type="module"></script>
+    <script src="js/foodgame.js" type="module"></script>
   </body>
 </html>

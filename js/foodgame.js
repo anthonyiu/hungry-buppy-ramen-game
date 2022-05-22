@@ -1,4 +1,4 @@
-import { currentWord } from "../js/words.js";
+import { currentWord } from "./words.js";
 
 // Menu
 

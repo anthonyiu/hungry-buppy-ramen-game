@@ -141,6 +141,7 @@ header {
 
   flex: 0 0 120px;
   color: #ffffff;
+  z-index: 10;
 }
 
 .header-left > a {
@@ -149,12 +150,15 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
 }
 
 .header-left > a:hover {
   cursor: pointer;
   color: var(--yellow);
+}
+
+.header-left > a:first-of-type {
+  margin-right: 0.2em;
 }
 
 .about {
@@ -319,7 +323,7 @@ footer {
   transform: translate(2px, 2px);
 }
 
-footer .btn {
+.btn {
   color: #333333;
   background-color: #ffffff;
   /* border: 2px solid #ffffff; */
@@ -330,15 +334,19 @@ footer .btn {
   box-shadow: #999999 4px 4px 0 0;
 }
 
-footer .btn:hover {
+.btn:hover {
   /* border: 2px solid #222222; */
   background-color: #222222;
   color: #ffffff;
 }
 
-footer .btn:active {
+.btn:active {
   box-shadow: #999999 2px 2px 0 0;
   transform: translate(2px, 2px);
+}
+
+.btn img {
+  width: 1.2rem;
 }
 
 #message {
@@ -398,7 +406,9 @@ footer .btn:active {
 #board > span.won {
   background-color: var(--green);
   color: #ffffff;
-  padding: 2px 2px 2px 8px;
+  padding: 5px 5px 5px 12px;
+  border: 5px solid #ffffff;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.6);
 }
 
 #board > span.lost,
@@ -486,6 +496,7 @@ nav {
 
 nav > div {
   font-size: 1rem;
+  letter-spacing: -1px;
   position: absolute;
   top: 0;
   left: -250px;
@@ -547,15 +558,15 @@ nav li label.switch {
 }
 
 nav li a i {
-  font-size: 140%;
+  font-size: 1.4em;
   margin-left: -0.2em;
-  margin-right: -0.1em;
+  margin-right: -0.3em;
 }
 
 nav li a img {
   width: 1.4em;
-  margin-left: -0.2em;
-  margin-right: -0.1em;
+  margin-left: -0.15em;
+  margin-right: -0.15em;
 }
 
 nav li:hover {
@@ -812,11 +823,13 @@ body.darkmode .modal-close:hover {
 
   .header-left {
     flex-basis: 1em;
-    align-self: stretch;
+    margin-top: 0.2em;
+    /* align-self: stretch; */
   }
   .title {
     margin-left: -1em;
-    align-self: flex-end;
+    margin-top: 0.2em;
+    /* align-self: flex-end; */
   }
 
   .header-right {
@@ -832,13 +845,13 @@ body.darkmode .modal-close:hover {
 
   header {
     font-size: 0.8rem;
-    /* flex-wrap: wrap; */
+    padding: 0.5rem 1.5rem;
   }
 
-  /* .header-right {
-    flex: 1 0 100vw;
+  .header-right {
+    font-size: 1.2em;
   }
-
+  /* 
   .header-right > div {
     flex: 1 1 50vw;
   } */
@@ -854,9 +867,9 @@ body.darkmode .modal-close:hover {
     padding: 2px 0 0 2px; */
   }
 
-  footer .btn {
+  /* footer .btn {
     margin-top: 0.8rem;
-  }
+  } */
 }
 
 @media screen and (max-width: 300px) {
