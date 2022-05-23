@@ -10,6 +10,11 @@
   --dark-mode-charcoal: #202124;
   --dark-mode-bg: #000000;
 
+  --opeasea-dark-sea: #1868b7;
+  --opeasea-sea-blue: #2081e2;
+  --opeasea-marina-blue: #e2e6ef;
+  --opeasea-aqua: #2bcde4;
+
   --header-height: 80px;
   --footer-height: 220px;
   --buppy-img-padding: 1rem;
@@ -141,7 +146,7 @@ header {
 
   flex: 0 0 120px;
   color: #ffffff;
-  z-index: 10;
+  z-index: 100;
 }
 
 .header-left > a {
@@ -320,6 +325,16 @@ footer {
   width: 1.2rem;
 }
 
+.btn.opensea {
+  background-color: var(--opeasea-dark-sea);
+  border: 3px solid #ffffff;
+  color: #ffffff;
+}
+
+.btn.opensea:hover {
+  background-color: var(--opeasea-aqua);
+}
+
 #message {
   display: flex;
   align-items: center;
@@ -467,7 +482,7 @@ nav {
 
 nav > div {
   font-size: 1rem;
-  letter-spacing: -1px;
+  /* letter-spacing: -1px; */
   position: absolute;
   top: 0;
   left: -250px;
@@ -567,11 +582,10 @@ nav li:hover {
 /* Modal */
 .modal-window {
   z-index: 999;
-
   transition: all 0.3s;
 }
 
-.modal-window:target {
+.modal-window.active {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
@@ -580,8 +594,6 @@ nav li:hover {
   width: 50vw;
   max-width: 500px;
   position: absolute;
-  /* top: 0; */
-  /* left: 0; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -602,7 +614,7 @@ nav li:hover {
 }
 
 .modal-close {
-  color: var(--dark-blue-tint);
+  color: #ffffff;
   line-height: 50px;
   font-size: 80%;
   position: absolute;
@@ -611,6 +623,7 @@ nav li:hover {
   top: 0;
   width: 70px;
   text-decoration: none;
+  cursor: pointer;
 }
 .modal-close:hover {
   color: #aaaaaa;

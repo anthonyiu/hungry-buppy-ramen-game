@@ -38,6 +38,34 @@ darkmodeSwitch.addEventListener("click", () => {
   darkmodeToggle(!darkmodeStatus);
 });
 
+// Modal Window
+
+const modalToggle = (target) => {
+  console.log(target);
+  target.classList.toggle("active");
+};
+
+const modalOpen = document.querySelectorAll(".modal-open");
+modalOpen.forEach((e) => {
+  e.addEventListener("click", () => {
+    modalToggle(e.nextElementSibling);
+  });
+});
+
+const modalClose = document.querySelectorAll(".modal-close");
+modalClose.forEach((e) => {
+  e.addEventListener("click", () => {
+    modalToggle(e.closest(".modal-window"));
+  });
+});
+
+// const modalOverlayClose = document.querySelectorAll(".modal-window.overlay");
+// modalOverlayClose.forEach((e) => {
+//   e.addEventListener("click", () => {
+//     if (e.classList.contains("active")) modalToggle(e);
+//   });
+// });
+
 // Game Core
 
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -69,7 +97,7 @@ const start = function () {
   showCoins(fail);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
   start();
   const loadLocalStorage = () => {
     darkmodeStatus =
@@ -82,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // buppyStatus = window.localStorage.getItem("buppyStatus");
     // timerStatus = window.localStorage.getItem("timerStatus");
     // boardStatus = window.localStorage.getItem("boardStatus");
+    modalToggle(document.querySelector("#stats"));
   };
 
   loadLocalStorage();

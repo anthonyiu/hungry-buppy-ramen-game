@@ -31,6 +31,19 @@
     <header class="flex-item">
       <div class="header-left">
         <a id="menuOpen" href="#"><i class="fa-solid fa-bars"></i></a>
+        <a class="stat-open modal-open" href="#"
+          ><i class="fa-solid fa-chart-column fa-fw"></i
+        ></a>
+        <div id="stats" class="modal-window overlay">
+          <div>
+            <a title="Close" class="modal-close">X</a>
+            <h1>Stats</h1>
+            <div class="modal-content">
+              <p>Stats here</p>
+              <p></p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="title">
         Hungry&nbsp;Buppy&nbsp;NFT<br />
@@ -89,20 +102,21 @@
         <a id="menuClose" href="#" title="Close" class="menu-close">X</a>
         <div class="menu-title">Menu</div>
         <ul>
+          <li></li>
           <li>
-            <a id="statOpen" href="#"
-              ><i class="fa-solid fa-chart-column fa-fw"></i>&nbsp;Stats</a
+            <a class="how-to modal-open" href="#how-to-modal"
+              >?&nbsp;How to Play</a
             >
-          </li>
-          <li>
-            <a class="how-to" href="#how-to-modal">?&nbsp;How to Play</a>
             <div id="how-to-modal" class="modal-window overlay">
               <div>
-                <a href="#" title="Close" class="modal-close">X</a>
+                <a title="Close" class="modal-close">X</a>
                 <h1>How to Play</h1>
                 <div class="modal-content">
                   <p>
                     Timer, Coin, Hangman Game<br />
+
+                    Mouse or Keyboard to enter your answer<br />
+
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Eveniet officia, quisquam ratione sapiente, vitae, autem
                     quae mollitia sunt consectetur nam quo illo! Tempora illum
@@ -119,7 +133,9 @@
             </div>
           </li>
           <li>
-            <a class="about" href="#about-modal">!&nbsp;About the Game</a>
+            <a class="about modal-open" href="#about-modal"
+              >!&nbsp;About the Game</a
+            >
             <div id="about-modal" class="modal-window overlay">
               <div>
                 <a title="Close" class="modal-close">X</a>
@@ -136,7 +152,7 @@
                   </p>
 
                   <a
-                    class="btn"
+                    class="btn opensea"
                     href="https://opensea.io/collection/hungry-buppy-nft"
                     target="_blank"
                     ><img src="img/opensea.svg" alt="OpenSea" />&nbsp;OpenSea</a
@@ -157,13 +173,13 @@
             >
           </li>
           <li>
-            <a href="https://twitter.com/HungryBuppynft" target="_blank"
-              ><i class="fa-brands fa-twitter fa-fw"></i>&nbsp;Twitter</a
+            <a href="https://www.instagram.com/hungrybuppynft/" target="_blank"
+              ><i class="fa-brands fa-instagram fa-fw"></i>&nbsp;Instagram</a
             >
           </li>
           <li>
-            <a href="https://www.instagram.com/hungrybuppynft/" target="_blank"
-              ><i class="fa-brands fa-instagram fa-fw"></i>&nbsp;Instagram</a
+            <a href="https://twitter.com/HungryBuppynft" target="_blank"
+              ><i class="fa-brands fa-twitter fa-fw"></i>&nbsp;Twitter</a
             >
           </li>
         </ul>
