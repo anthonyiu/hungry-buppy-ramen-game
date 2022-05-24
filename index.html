@@ -30,7 +30,7 @@
   <body class="flex-container">
     <header class="flex-item">
       <div class="header-left">
-        <a id="menuOpen" href="#"><i class="fa-solid fa-bars"></i></a>
+        <a id="menuOpen" href="#"><i class="fa-solid fa-bars fa-fw"></i></a>
         <a class="stat-open modal-open" href="#"
           ><i class="fa-solid fa-chart-column fa-fw"></i
         ></a>
@@ -39,8 +39,15 @@
             <a title="Close" class="modal-close">X</a>
             <h1>Stats</h1>
             <div class="modal-content">
-              <p>Stats here</p>
+              <p id="shareData">✅<br />❌</p>
               <p></p>
+              <a id="share" class="btn"
+                ><i class="fa-solid fa-share-nodes fa-lg"></i
+              ></a>
+              <a id="copy" class="btn tooltip"
+                ><i class="fa-regular fa-copy fa-lg"></i>
+                <span class="tooltiptext">Copy to Clipboard</span>
+              </a>
             </div>
           </div>
         </div>

@@ -262,3 +262,23 @@ clickToHash.forEach((e) =>
     location.href = "#";
   })
 );
+
+// Share and Copy Data
+
+var regex = /<br\s*[\/]?>/gi;
+
+const shareData = {
+  // title: "Hungry Buppy NFT - the Food Game",
+  text: document.querySelector("#shareData").innerHTML.replace(regex, "\n"),
+};
+
+const shareButton = document.querySelector("#share");
+shareButton.addEventListener("click", () => {
+  navigator.share(shareData);
+});
+
+const copyButton = document.querySelector("#copy");
+copyButton.addEventListener("click", () => {
+  console.log(shareData.text);
+  navigator.clipboard.writeText(shareData.text);
+});
