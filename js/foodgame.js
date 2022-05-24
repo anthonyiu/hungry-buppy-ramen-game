@@ -41,7 +41,6 @@ darkmodeSwitch.addEventListener("click", () => {
 // Modal Window
 
 const modalToggle = (target) => {
-  console.log(target);
   target.classList.toggle("active");
 };
 
@@ -59,6 +58,42 @@ modalClose.forEach((e) => {
   });
 });
 
+//OverlayClose both Modal and Menu
+
+const overlayClose = document.querySelectorAll(".overlay");
+overlayClose.forEach((e) => {
+  e.addEventListener("click", () => {
+    e.parentElement.classList.toggle("active");
+  });
+});
+
+// Share and Copy Data
+
+var regex = /<br\s*[\/]?>/gi;
+
+const shareDataDisplay = document.querySelector("#shareData");
+
+const shareButton = document.querySelector("#share");
+shareButton.addEventListener("click", () => {
+  let shareData = {
+    text: shareDataDisplay.innerHTML.replace(regex, "\n"),
+  };
+  navigator.share(shareData);
+});
+
+const copyButton = document.querySelector("#copy");
+copyButton.addEventListener("click", () => {
+  let shareData = {
+    text: shareDataDisplay.innerHTML.replace(regex, "\n"),
+  };
+  navigator.clipboard.writeText(shareData.text);
+  copyButton.querySelector("span.tooltiptext").innerHTML = "Copied!";
+});
+
+copyButton.addEventListener("mouseout", () => {
+  copyButton.querySelector("span.tooltiptext").innerHTML = "Copy to Clipboard";
+});
+
 // const modalOverlayClose = document.querySelectorAll(".modal-window.overlay");
 // modalOverlayClose.forEach((e) => {
 //   e.addEventListener("click", () => {
@@ -73,8 +108,8 @@ const keyboard = document.getElementById("keyboard");
 const message = document.getElementById("message");
 const timer = document.querySelector("#timer");
 const board = document.querySelector("#board > span");
-
-const coins = document.querySelector("#coins");
+const statsDisplay = document.querySelector("#stats");
+const ticketDisplay = document.querySelector("#ticket");
 
 const displayToggle = (e, block) => {
   e.style.display = block ? "block" : "none";
@@ -84,6 +119,7 @@ const displayToggle = (e, block) => {
 // const password = words[random];
 // const password = currentWord;
 let fail = 0;
+let ticket = 6;
 let countDown;
 let gameStatus = "start";
 let keyboardStatus, coinStatus;
@@ -93,8 +129,8 @@ const start = function () {
     keyboard.insertAdjacentHTML("beforeend", html);
   });
   showPassword();
-  showEyes(fail);
-  showCoins(fail);
+  showEyes(ticket);
+  showTicket(ticket);
 };
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -103,14 +139,14 @@ window.addEventListener("DOMContentLoaded", () => {
     darkmodeStatus =
       window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
     darkmodeToggle(darkmodeStatus);
-    // fail = window.localStorage.getItem("fail");
+    // ticket = window.localStorage.getItem("ticket");
     // gameStatus = window.localStorage.getItem("gameStatus");
     // keyboardStatus = window.localStorage.getItem("keyboardStatus");
     // coinStatus = window.localStorage.getItem("coinStatus");
     // buppyStatus = window.localStorage.getItem("buppyStatus");
     // timerStatus = window.localStorage.getItem("timerStatus");
     // boardStatus = window.localStorage.getItem("boardStatus");
-    modalToggle(document.querySelector("#stats"));
+    // modalToggle(document.querySelector("#stats"));
   };
 
   loadLocalStorage();
@@ -134,25 +170,25 @@ const currentWordDashed = currentWord.split("").map((letter) => {
   else return "_";
 });
 
-const showCoins = (e) => {
-  coins.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${6 - e}`;
+const showTicket = (ticket) => {
+  ticketDisplay.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${ticket}`;
 
-  if (6 - e == 1) {
-    coins.classList.add("lastcoin");
+  if (ticket == 1) {
+    ticketDisplay.classList.add("lastcoin");
   }
 };
 
-const deductFood = (e) => {
-  displayToggle(document.querySelector(`#food${e}`), false);
+const deductFood = (target) => {
+  displayToggle(document.querySelector(`#food${6 - target}`), false);
 };
 
 const showPassword = function () {
   board.innerHTML = currentWordDashed.join("");
 };
 
-const showEyes = (e) => {
+const showEyes = (target) => {
   document.querySelectorAll(".eyes").forEach((e) => displayToggle(e, false));
-  displayToggle(document.querySelector(`#eyes${e}`), true);
+  displayToggle(document.querySelector(`#eyes${target}`), true);
 };
 
 const checkLetter = function (e) {
@@ -170,21 +206,21 @@ const checkLetter = function (e) {
         });
       deactivateLetter(true, pressedLetter);
     } else {
-      fail++;
-      showEyes(fail);
-      deductFood(fail);
-      showCoins(fail);
+      ticket--;
+      showEyes(ticket);
+      deductFood(ticket);
+      showTicket(ticket);
 
-      if (fail) {
-        coins.classList.add("shake");
+      if (ticket) {
+        ticketDisplay.classList.add("shake");
       }
       window.setTimeout(function () {
-        coins.classList.remove("shake");
+        ticketDisplay.classList.remove("shake");
       }, 3000);
 
       deactivateLetter(false, pressedLetter);
     }
-    if (fail == 6) {
+    if (ticket == 0) {
       finish(false);
     }
     if (currentWord.toUpperCase() === currentWordDashed.join("")) {
@@ -215,9 +251,14 @@ const finish = function (success) {
 
     clearInterval(countDown);
   }
+
+  shareDataDisplay.innerHTML = `🍜🍡🍮🍤🍙🍣<br>${"✅".repeat(
+    ticket
+  )}${"❌".repeat(6 - ticket)}`;
   gameStatus = "finish";
+  statsDisplay.classList.toggle("active");
   document
-    .querySelector("a.btn")
+    .querySelector("#message a.btn")
     .addEventListener("click", () => location.reload());
 };
 const timerCount = function () {
@@ -242,7 +283,7 @@ const timerCount = function () {
       document
         .querySelectorAll(".eyes")
         .forEach((e) => displayToggle(e, false));
-      showEyes(6);
+      showEyes(0);
 
       // all food off
       document
@@ -256,29 +297,12 @@ const timerCount = function () {
 };
 timerCount();
 
-const clickToHash = document.querySelectorAll(".modal-window.overlay");
-clickToHash.forEach((e) =>
-  e.addEventListener("click", function () {
-    location.href = "#";
-  })
-);
-
-// Share and Copy Data
-
-var regex = /<br\s*[\/]?>/gi;
-
-const shareData = {
-  // title: "Hungry Buppy NFT - the Food Game",
-  text: document.querySelector("#shareData").innerHTML.replace(regex, "\n"),
+const nextwordCountDown = () => {
+  let currentDay = new Date();
+  let nextDay = (currentDay.getDate() + 1).setHours(0, 0, 0, 0);
+  console.log(nextDay - currentDay);
+  const nextwordTimer = document.querySelector("#nextwordTimer");
+  nextwordTimer.textContent = (nextDay - currentDay).toTimeString();
 };
 
-const shareButton = document.querySelector("#share");
-shareButton.addEventListener("click", () => {
-  navigator.share(shareData);
-});
-
-const copyButton = document.querySelector("#copy");
-copyButton.addEventListener("click", () => {
-  console.log(shareData.text);
-  navigator.clipboard.writeText(shareData.text);
-});
+setInterval(nextwordCountDown, 1000);

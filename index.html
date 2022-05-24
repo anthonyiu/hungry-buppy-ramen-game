@@ -34,13 +34,14 @@
         <a class="stat-open modal-open" href="#"
           ><i class="fa-solid fa-chart-column fa-fw"></i
         ></a>
-        <div id="stats" class="modal-window overlay">
-          <div>
+        <div id="stats" class="modal-window">
+          <div class="modal-body">
             <a title="Close" class="modal-close">X</a>
             <h1>Stats</h1>
             <div class="modal-content">
-              <p id="shareData">✅<br />❌</p>
-              <p></p>
+              <div id="shareData">✅<br />❌</div>
+              <div id="nextwordTimer"></div>
+
               <a id="share" class="btn"
                 ><i class="fa-solid fa-share-nodes fa-lg"></i
               ></a>
@@ -50,6 +51,7 @@
               </a>
             </div>
           </div>
+          <div class="overlay"></div>
         </div>
       </div>
       <div class="title">
@@ -59,7 +61,7 @@
 
       <div class="header-right">
         <div id="timer" class="timer">0:00:00</div>
-        <div id="coins"><i class="fa-solid fa-ticket"></i> x 0</div>
+        <div id="ticket"><i class="fa-solid fa-ticket"></i> x 0</div>
       </div>
     </header>
     <main class="flex-item">
@@ -104,8 +106,8 @@
         <div id="keyboard"></div>
       </div>
     </footer>
-    <nav id="menu" class="overlay">
-      <div>
+    <nav id="menu">
+      <div class="menu-body">
         <a id="menuClose" href="#" title="Close" class="menu-close">X</a>
         <div class="menu-title">Menu</div>
         <ul>
@@ -114,8 +116,8 @@
             <a class="how-to modal-open" href="#how-to-modal"
               >?&nbsp;How to Play</a
             >
-            <div id="how-to-modal" class="modal-window overlay">
-              <div>
+            <div id="how-to-modal" class="modal-window">
+              <div class="modal-body">
                 <a title="Close" class="modal-close">X</a>
                 <h1>How to Play</h1>
                 <div class="modal-content">
@@ -137,6 +139,7 @@
                   </p>
                 </div>
               </div>
+              <div class="overlay"></div>
             </div>
           </li>
           <li>
@@ -144,7 +147,7 @@
               >!&nbsp;About the Game</a
             >
             <div id="about-modal" class="modal-window overlay">
-              <div>
+              <div class="modal-body">
                 <a title="Close" class="modal-close">X</a>
                 <h1>About the Game</h1>
                 <div class="buppy-img"><img src="img/buppy_ani_1.gif" /></div>
@@ -166,6 +169,7 @@
                   >
                 </div>
               </div>
+              <div class="overlay"></div>
             </div>
           </li>
         </ul>
@@ -205,6 +209,7 @@
           </li>
         </ul>
       </div>
+      <div class="overlay"></div>
     </nav>
 
     <script src="js/foodgame.js" type="module"></script>

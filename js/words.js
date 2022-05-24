@@ -30,6 +30,15 @@ const wordsAM = [
   "lychee",
   "longan",
   "fruits",
+];
+
+const wordsPM = [
+  "Eating",
+  "Dining",
+  "Fruits",
+  "Teabag",
+  "Lemons",
+  "Buffet",
   "celery",
   "teabag",
   "fennel",
@@ -38,8 +47,6 @@ const wordsAM = [
   "dining",
   "grapes",
 ];
-
-const wordsPM = ["Eating", "Dining", "Fruits", "Teabag", "Lemons", "Buffet"];
 
 const startDate = new Date("2022-05-18");
 const today = new Date();
