@@ -193,7 +193,7 @@ header {
   justify-content: flex-end;
   align-items: flex-end;
 
-  font-size: 1em;
+  font-size: 1.2em;
   color: var(--yellow);
   /* flex-direction: column; */
 }
@@ -212,15 +212,6 @@ header {
   max-width: 800px;
   /* max-height: 700px; */
   margin: auto;
-}
-
-.timer {
-  background-color: var(--green);
-  color: #ffffff;
-}
-
-.timer.timeout {
-  background-color: var(--red);
 }
 
 #ticket {
@@ -835,9 +826,6 @@ body.darkmode .tooltip .tooltiptext::after {
 
   footer {
     font-size: 1.8rem;
-    /* width: 2.5rem;
-    height: 2.5rem; */
-    /* padding: 2px 0 0 2px; */
   }
 }
 
@@ -858,9 +846,6 @@ body.darkmode .tooltip .tooltiptext::after {
 
   footer {
     font-size: 1.5rem;
-    /* width: 2.5rem;
-    height: 2.5rem; */
-    /* padding: 2px 0 0 2px; */
   }
 }
 
@@ -879,9 +864,6 @@ body.darkmode .tooltip .tooltiptext::after {
 
   footer {
     font-size: 1.3rem;
-    /* width: 2rem;
-    height: 2rem; */
-    /* padding: 2px 0 0 2px; */
   }
 }
 
@@ -894,12 +876,10 @@ body.darkmode .tooltip .tooltiptext::after {
   .header-left {
     flex-basis: 1em;
     margin-top: 0.2em;
-    /* align-self: stretch; */
   }
   .title {
     margin-left: -1em;
     margin-top: 0.2em;
-    /* align-self: flex-end; */
   }
 
   .header-right {
@@ -918,28 +898,13 @@ body.darkmode .tooltip .tooltiptext::after {
     padding: 0.5rem 1.5rem 0;
   }
 
-  .header-right {
-    font-size: 1.2em;
-  }
-  /* 
-  .header-right > div {
-    flex: 1 1 50vw;
-  } */
-
   .modal-window > .modal-body {
     width: 80vw;
   }
 
   footer {
     font-size: 1rem;
-    /* width: 1.8rem;
-    height: 1.8rem;
-    padding: 2px 0 0 2px; */
   }
-
-  /* footer .btn {
-    margin-top: 0.8rem;
-  } */
 }
 
 @media screen and (max-width: 300px) {

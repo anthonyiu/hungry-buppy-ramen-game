@@ -1,4 +1,5 @@
 import { currentWord } from "./words.js";
+import { countDown } from "./countdowntimer.js";
 
 // Menu
 
@@ -106,7 +107,6 @@ copyButton.addEventListener("mouseout", () => {
 let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const keyboard = document.getElementById("keyboard");
 const message = document.getElementById("message");
-const timer = document.querySelector("#timer");
 const board = document.querySelector("#board > span");
 const statsDisplay = document.querySelector("#stats");
 const ticketDisplay = document.querySelector("#ticket");
@@ -120,7 +120,6 @@ const displayToggle = (e, block) => {
 // const password = currentWord;
 let fail = 0;
 let ticket = 6;
-let countDown;
 let gameStatus = "start";
 let keyboardStatus, coinStatus;
 const start = function () {
@@ -144,7 +143,6 @@ window.addEventListener("DOMContentLoaded", () => {
     // keyboardStatus = window.localStorage.getItem("keyboardStatus");
     // coinStatus = window.localStorage.getItem("coinStatus");
     // buppyStatus = window.localStorage.getItem("buppyStatus");
-    // timerStatus = window.localStorage.getItem("timerStatus");
     // boardStatus = window.localStorage.getItem("boardStatus");
     // modalToggle(document.querySelector("#stats"));
   };
@@ -240,16 +238,12 @@ const finish = function (success) {
     board.classList.add("won");
     keyboard.classList.add("won");
     showEyes("won");
-
-    clearInterval(countDown);
   } else {
     message.innerHTML = `<h1 class="lost">YOU LOST!</h1>
     <div class="answer">The answer is: <br><span class="password">${currentWord}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
 
     keyboard.classList.add("lost");
     board.classList.add("lost");
-
-    clearInterval(countDown);
   }
 
   shareDataDisplay.innerHTML = `🍜🍡🍮🍤🍙🍣<br>${"✅".repeat(
@@ -261,48 +255,5 @@ const finish = function (success) {
     .querySelector("#message a.btn")
     .addEventListener("click", () => location.reload());
 };
-const timerCount = function () {
-  //Change time limit here
-  let time = new Date(300000);
-  const options = {
-    minute: "2-digit",
-    second: "2-digit",
-  };
-  const tick = function () {
-    time -= 1000;
-    timer.textContent = Intl.DateTimeFormat("en-US", options).format(time);
-    if (time == 10000) {
-      timer.classList.add("timeout");
-    }
-    if (time == 0) {
-      finish(false);
-      clearInterval(countDown);
 
-      // all eyes off but Eyes6 on
-
-      document
-        .querySelectorAll(".eyes")
-        .forEach((e) => displayToggle(e, false));
-      showEyes(0);
-
-      // all food off
-      document
-        .querySelectorAll("img[src^='img/food']")
-        .forEach((e) => displayToggle(e, false));
-    }
-  };
-  tick();
-  countDown = setInterval(tick, 1000);
-  return countDown;
-};
-timerCount();
-
-const nextwordCountDown = () => {
-  let currentDay = new Date();
-  let nextDay = (currentDay.getDate() + 1).setHours(0, 0, 0, 0);
-  console.log(nextDay - currentDay);
-  const nextwordTimer = document.querySelector("#nextwordTimer");
-  nextwordTimer.textContent = (nextDay - currentDay).toTimeString();
-};
-
-setInterval(nextwordCountDown, 1000);
+setInterval(countDown, 1000);

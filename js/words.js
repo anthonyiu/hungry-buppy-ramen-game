@@ -48,7 +48,7 @@ const wordsPM = [
   "grapes",
 ];
 
-const startDate = new Date("2022-05-18");
+const startDate = new Date("2022-05-27");
 const today = new Date();
 const gameId = today.getDate() - startDate.getDate();
 const gameDaySession = today.getHours();
