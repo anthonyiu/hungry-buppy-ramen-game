@@ -256,4 +256,4 @@ const finish = function (success) {
     .addEventListener("click", () => location.reload());
 };
 
-setInterval(countDown, 1000);
+countDown();
