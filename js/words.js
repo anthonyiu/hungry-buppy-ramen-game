@@ -1,4 +1,4 @@
-const wordsAM = [
+const words = [
   "cookie",
   "peanut",
   "noodle",
@@ -30,9 +30,6 @@ const wordsAM = [
   "lychee",
   "longan",
   "fruits",
-];
-
-const wordsPM = [
   "Eating",
   "Dining",
   "Fruits",
@@ -48,10 +45,34 @@ const wordsPM = [
   "grapes",
 ];
 
-const startDate = new Date("2022-05-27");
-const today = new Date();
-const gameId = today.getDate() - startDate.getDate();
-const gameDaySession = today.getHours();
-const currentWord = gameDaySession < 12 ? wordsAM[gameId] : wordsPM[gameId];
+// const wordsPM = [
+//   "Eating",
+//   "Dining",
+//   "Fruits",
+//   "Teabag",
+//   "Lemons",
+//   "Buffet",
+//   "celery",
+//   "teabag",
+//   "fennel",
+//   "buffet",
+//   "eating",
+//   "dining",
+//   "grapes",
+// ];
 
-export { currentWord, gameId, gameDaySession };
+const currentWord = () => {
+  const startDate = new Date("2022-06-06");
+  const today = new Date();
+  const gameId = today.getDate() - startDate.getDate();
+  const todayWord = words[gameId];
+  // const gameDaySession = today.getHours();
+  // return gameDaySession < 12 ? wordsAM[gameId] : wordsPM[gameId];
+  return {
+    today: today,
+    gameId: gameId,
+    todayWord: todayWord,
+  };
+};
+
+export { currentWord };

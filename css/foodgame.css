@@ -264,11 +264,11 @@ main {
   display: none;
 }
 
-.food1 {
+.layer1 {
   z-index: 30;
 }
 
-.food2 {
+.layer2 {
   z-index: 35;
 }
 

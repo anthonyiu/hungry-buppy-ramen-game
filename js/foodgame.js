@@ -1,5 +1,4 @@
 import { currentWord } from "./words.js";
-import { countDown } from "./countdowntimer.js";
 
 // Menu
 
@@ -95,12 +94,36 @@ copyButton.addEventListener("mouseout", () => {
   copyButton.querySelector("span.tooltiptext").innerHTML = "Copy to Clipboard";
 });
 
-// const modalOverlayClose = document.querySelectorAll(".modal-window.overlay");
-// modalOverlayClose.forEach((e) => {
-//   e.addEventListener("click", () => {
-//     if (e.classList.contains("active")) modalToggle(e);
-//   });
-// });
+// countDown
+
+const countDown = () => {
+  const timer = setInterval(() => {
+    const now = new Date();
+    let tomorrow = new Date(now);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    // Find the distance between now and the count down date
+    const distance = tomorrow.getTime() - now.getTime();
+
+    // Time calculations hours, minutes and seconds
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.querySelector("#nextwordTimer").innerHTML = `${("0" + hours).slice(
+      -2
+    )}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
+
+    if (distance < 0) {
+      clearInterval(timer);
+      resetGame();
+    }
+  });
+};
+
+countDown();
 
 // Game Core
 
@@ -115,58 +138,29 @@ const displayToggle = (e, block) => {
   e.style.display = block ? "block" : "none";
 };
 
-// const random = Math.floor(Math.random() * words.length);
-// const password = words[random];
-// const password = currentWord;
-let fail = 0;
+let gameWon = 0;
+let gamePlayed = 0;
 let ticket = 6;
 let gameStatus = "start";
-let keyboardStatus, coinStatus;
-const start = function () {
-  letters.split("").forEach((letter) => {
-    const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
-    keyboard.insertAdjacentHTML("beforeend", html);
-  });
-  showPassword();
-  showEyes(ticket);
-  showTicket(ticket);
+let keyboardStatus;
+let currentWordDashed;
+
+const resetGame = () => {
+  window.localStorage.removeItem("keyboardStatus");
+  window.localStorage.removeItem("boardStatus");
+  window.localStorage.removeItem("ticket");
+  ticket = 0;
+  blankKeyboard();
+  blankBoard();
+  start();
 };
 
-window.addEventListener("DOMContentLoaded", () => {
-  start();
-  const loadLocalStorage = () => {
-    darkmodeStatus =
-      window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
-    darkmodeToggle(darkmodeStatus);
-    // ticket = window.localStorage.getItem("ticket");
-    // gameStatus = window.localStorage.getItem("gameStatus");
-    // keyboardStatus = window.localStorage.getItem("keyboardStatus");
-    // coinStatus = window.localStorage.getItem("coinStatus");
-    // buppyStatus = window.localStorage.getItem("buppyStatus");
-    // boardStatus = window.localStorage.getItem("boardStatus");
-    // modalToggle(document.querySelector("#stats"));
-  };
-
-  loadLocalStorage();
-
-  const allLetters = document.querySelectorAll(".letter.unhit");
-  allLetters.forEach((e) =>
-    e.addEventListener("click", (input) => {
-      checkLetter(input.target.textContent);
-    })
-  );
-
-  document.addEventListener("keyup", (input) => {
-    checkLetter(input.key.toUpperCase());
-  });
-});
-
-const currentWordDashed = currentWord.split("").map((letter) => {
-  if (letter === " ") return " ";
-  else if (letter === "’") return "’";
-  else if (letter === ",") return ",";
-  else return "_";
-});
+const start = function () {
+  showBoard();
+  showEyes(ticket);
+  showTicket(ticket);
+  showFood(ticket);
+};
 
 const showTicket = (ticket) => {
   ticketDisplay.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${ticket}`;
@@ -180,7 +174,7 @@ const deductFood = (target) => {
   displayToggle(document.querySelector(`#food${6 - target}`), false);
 };
 
-const showPassword = function () {
+const showBoard = function () {
   board.innerHTML = currentWordDashed.join("");
 };
 
@@ -189,22 +183,96 @@ const showEyes = (target) => {
   displayToggle(document.querySelector(`#eyes${target}`), true);
 };
 
+const showFood = (target) => {
+  document.querySelectorAll(".food").forEach((e) => displayToggle(e, true));
+  let remainingTicket = target;
+  while (remainingTicket < 6) {
+    deductFood(remainingTicket);
+    remainingTicket++;
+  }
+};
+
+const blankKeyboard = () => {
+  letters.split("").forEach((letter) => {
+    const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
+    keyboard.insertAdjacentHTML("beforeend", html);
+  });
+};
+
+const blankBoard = () => {
+  currentWordDashed = currentWord()
+    .todayWord.split("")
+    .map((letter) => {
+      if (letter === " ") return " ";
+      else if (letter === "’") return "’";
+      else if (letter === ",") return ",";
+      else return "_";
+    });
+};
+
+const loadLocalStorage = () => {
+  darkmodeStatus =
+    window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
+  darkmodeToggle(darkmodeStatus);
+
+  ticket = Number(window.localStorage.getItem("ticket")) || 6;
+
+  if (window.localStorage.getItem("keyboardStatus")) {
+    keyboard.innerHTML = window.localStorage.getItem("keyboardStatus");
+  } else {
+    blankKeyboard();
+  }
+
+  if (window.localStorage.getItem("boardStatus")) {
+    board.innerHTML = window.localStorage.getItem("boardStatus");
+    currentWordDashed = window.localStorage.getItem("boardStatus").split("");
+  } else {
+    blankBoard();
+  }
+
+  gameStatus = window.localStorage.getItem("gameStatus") || "start";
+
+  gameWon = Number(window.localStorage.getItem("gameWon")) || 0;
+
+  gamePlayed = Number(window.localStorage.getItem("gamePlayed")) || 0;
+};
+
+window.addEventListener("DOMContentLoaded", () => {
+  loadLocalStorage();
+
+  start();
+
+  const allLetters = document.querySelectorAll(".letter.unhit");
+  allLetters.forEach((e) =>
+    e.addEventListener("click", (input) => {
+      checkLetter(input.target.textContent);
+    })
+  );
+
+  document.addEventListener("keyup", (input) => {
+    let pattern = /[A-Z]/;
+    let inputLetter = input.key.toUpperCase();
+    if (pattern.test(inputLetter)) checkLetter(inputLetter);
+  });
+});
+
 const checkLetter = function (e) {
   let pressedLetter = document.querySelector(`#letter${e}`);
   if (pressedLetter.classList.contains("unhit") && gameStatus !== "finish") {
-    if (currentWord.toUpperCase().split("").includes(e)) {
-      currentWord
-        .toUpperCase()
+    if (currentWord().todayWord.toUpperCase().split("").includes(e)) {
+      currentWord()
+        .todayWord.toUpperCase()
         .split("")
         .forEach((letter, i, arr) => {
           if (letter === e) {
             currentWordDashed[i] = letter;
-            showPassword();
+            showBoard();
           }
         });
       deactivateLetter(true, pressedLetter);
     } else {
       ticket--;
+      window.localStorage.setItem("ticket", ticket);
       showEyes(ticket);
       deductFood(ticket);
       showTicket(ticket);
@@ -214,14 +282,17 @@ const checkLetter = function (e) {
       }
       window.setTimeout(function () {
         ticketDisplay.classList.remove("shake");
-      }, 3000);
+      }, 300);
 
       deactivateLetter(false, pressedLetter);
     }
+
+    window.localStorage.setItem("boardStatus", board.innerHTML);
+
     if (ticket == 0) {
       finish(false);
     }
-    if (currentWord.toUpperCase() === currentWordDashed.join("")) {
+    if (currentWord().todayWord.toUpperCase() === currentWordDashed.join("")) {
       finish(true);
     }
   }
@@ -229,18 +300,21 @@ const checkLetter = function (e) {
 
 const deactivateLetter = function (hit, pressedLetter) {
   pressedLetter.className = hit ? "letter hit" : "letter not-hit";
+  window.localStorage.setItem("keyboardStatus", keyboard.innerHTML);
 };
 
 const finish = function (success) {
   if (success) {
-    message.innerHTML = `<h1 class="won">WELL DONE!</h1><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> PLAY AGAIN</a>`;
+    message.innerHTML = `<h1 class="won">WELL DONE!</h1>`;
 
     board.classList.add("won");
     keyboard.classList.add("won");
     showEyes("won");
   } else {
     message.innerHTML = `<h1 class="lost">YOU LOST!</h1>
-    <div class="answer">The answer is: <br><span class="password">${currentWord}</span></div><a class='btn'><i class="fa-solid fa-arrow-rotate-right"></i> TRY AGAIN</a>`;
+    <div class="answer">The answer is: <br><span class="password">${
+      currentWord().todayWord
+    }</span></div>`;
 
     keyboard.classList.add("lost");
     board.classList.add("lost");
@@ -250,10 +324,8 @@ const finish = function (success) {
     ticket
   )}${"❌".repeat(6 - ticket)}`;
   gameStatus = "finish";
-  statsDisplay.classList.toggle("active");
-  document
-    .querySelector("#message a.btn")
-    .addEventListener("click", () => location.reload());
-};
 
-countDown();
+  window.setTimeout(() => {
+    statsDisplay.classList.toggle("active");
+  }, 1000);
+};
