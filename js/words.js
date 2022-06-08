@@ -1,20 +1,20 @@
 const words = [
   "cookie",
-  "peanut",
+  "peanut butter",
   "noodle",
-  "kimchi",
+  "kimchi noodle",
   "cherry",
   "melons",
-  "carrot",
-  "potato",
-  "lemons",
+  "carrot cake",
+  "potato chips",
+  "sour lemons",
   "waffle",
   "almond",
   "onions",
   "ginger",
   "toasts",
-  "tomato",
-  "butter",
+  "tomato sauce",
+  "unsalted butter",
   "plates",
   "coffee",
   "cereal",
@@ -62,9 +62,12 @@ const words = [
 // ];
 
 const currentWord = () => {
-  const startDate = new Date("2022-06-06");
+  const startDate = new Date("2022-05-24");
   const today = new Date();
-  const gameId = today.getDate() - startDate.getDate();
+  const gameId = Math.floor(
+    (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
   const todayWord = words[gameId];
   // const gameDaySession = today.getHours();
   // return gameDaySession < 12 ? wordsAM[gameId] : wordsPM[gameId];

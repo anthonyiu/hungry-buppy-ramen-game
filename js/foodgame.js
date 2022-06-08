@@ -118,7 +118,8 @@ const countDown = () => {
 
     if (distance < 0) {
       clearInterval(timer);
-      resetGame();
+      newGame();
+      statsDisplay.classList.remove("active");
     }
   });
 };
@@ -145,33 +146,54 @@ let gameStatus = "start";
 let keyboardStatus;
 let currentWordDashed;
 
-const resetGame = () => {
-  window.localStorage.removeItem("keyboardStatus");
+const newGame = function () {
   window.localStorage.removeItem("boardStatus");
+  window.localStorage.removeItem("keyboardStatus");
   window.localStorage.removeItem("ticket");
-  ticket = 0;
-  blankKeyboard();
-  blankBoard();
-  start();
-};
+  window.localStorage.removeItem("messageContent");
 
-const start = function () {
-  showBoard();
+  blankBoard();
+  blankKeyboard();
+  ticket = 6;
+
   showEyes(ticket);
   showTicket(ticket);
   showFood(ticket);
+
+  gameStatus = "start";
+  window.localStorage.setItem("gameId", currentWord().gameId);
+};
+
+const oldGame = () => {
+  gameStatus = window.localStorage.getItem("gameStatus");
+  board.innerHTML = window.localStorage.getItem("boardStatus");
+
+  if (gameStatus !== "finish") {
+    currentWordDashed = window.localStorage.getItem("boardStatus").split("");
+  }
+
+  keyboard.innerHTML = window.localStorage.getItem("keyboardStatus");
+
+  message.innerHTML = window.localStorage.getItem("messageContent");
+
+  ticket = Number(window.localStorage.getItem("ticket"));
+  if (ticket > 0 && gameStatus === "finish") {
+    showEyes("won");
+  } else {
+    showEyes(ticket);
+  }
+  showTicket(ticket);
+  showFood(ticket);
+
+  shareDataDisplay.innerHTML = window.localStorage.getItem("shareData");
 };
 
 const showTicket = (ticket) => {
   ticketDisplay.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${ticket}`;
 
-  if (ticket == 1) {
-    ticketDisplay.classList.add("lastcoin");
+  if (ticket <= 1 && !ticketDisplay.classList.contains("lastTicket")) {
+    ticketDisplay.classList.add("lastTicket");
   }
-};
-
-const deductFood = (target) => {
-  displayToggle(document.querySelector(`#food${6 - target}`), false);
 };
 
 const showBoard = function () {
@@ -208,39 +230,34 @@ const blankBoard = () => {
       else if (letter === ",") return ",";
       else return "_";
     });
+  showBoard();
 };
 
-const loadLocalStorage = () => {
+const deductFood = (target) => {
+  displayToggle(document.querySelector(`#food${6 - target}`), false);
+};
+
+window.addEventListener("DOMContentLoaded", () => {
   darkmodeStatus =
     window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
   darkmodeToggle(darkmodeStatus);
 
-  ticket = Number(window.localStorage.getItem("ticket")) || 6;
-
-  if (window.localStorage.getItem("keyboardStatus")) {
-    keyboard.innerHTML = window.localStorage.getItem("keyboardStatus");
-  } else {
-    blankKeyboard();
-  }
-
-  if (window.localStorage.getItem("boardStatus")) {
-    board.innerHTML = window.localStorage.getItem("boardStatus");
-    currentWordDashed = window.localStorage.getItem("boardStatus").split("");
-  } else {
-    blankBoard();
-  }
-
-  gameStatus = window.localStorage.getItem("gameStatus") || "start";
-
   gameWon = Number(window.localStorage.getItem("gameWon")) || 0;
 
   gamePlayed = Number(window.localStorage.getItem("gamePlayed")) || 0;
-};
 
-window.addEventListener("DOMContentLoaded", () => {
-  loadLocalStorage();
+  // if (!window.localStorage.getItem("gameId")) {
+  //   document.querySelector("#how-to-modal").classList.add("active");
+  // }
 
-  start();
+  if (
+    !window.localStorage.getItem("gameId") ||
+    Number(window.localStorage.getItem("gameId")) !== currentWord().gameId
+  ) {
+    newGame();
+  } else {
+    oldGame();
+  }
 
   const allLetters = document.querySelectorAll(".letter.unhit");
   allLetters.forEach((e) =>
@@ -272,7 +289,7 @@ const checkLetter = function (e) {
       deactivateLetter(true, pressedLetter);
     } else {
       ticket--;
-      window.localStorage.setItem("ticket", ticket);
+
       showEyes(ticket);
       deductFood(ticket);
       showTicket(ticket);
@@ -286,6 +303,8 @@ const checkLetter = function (e) {
 
       deactivateLetter(false, pressedLetter);
     }
+
+    window.localStorage.setItem("ticket", ticket);
 
     window.localStorage.setItem("boardStatus", board.innerHTML);
 
@@ -305,27 +324,52 @@ const deactivateLetter = function (hit, pressedLetter) {
 
 const finish = function (success) {
   if (success) {
-    message.innerHTML = `<h1 class="won">WELL DONE!</h1>`;
-
-    board.classList.add("won");
-    keyboard.classList.add("won");
-    showEyes("won");
-  } else {
-    message.innerHTML = `<h1 class="lost">YOU LOST!</h1>
-    <div class="answer">The answer is: <br><span class="password">${
+    message.innerHTML = `<span class="answer won">${
       currentWord().todayWord
-    }</span></div>`;
+    }</span>`;
 
-    keyboard.classList.add("lost");
-    board.classList.add("lost");
+    board.classList.add("hidden");
+    keyboard.classList.add("hidden");
+    showEyes("won");
+    console.log(message);
+    window.setTimeout(() => {
+      console.log(message);
+      message
+        .querySelector(".answer")
+        .classList.add("animate__animated", "animate__bounce");
+    }, 300);
+
+    gameWon++;
+    window.localStorage.setItem("gameWon", gameWon);
+  } else {
+    message.innerHTML = `<span class="answer lost">${
+      currentWord().todayWord
+    }</span>`;
+
+    keyboard.classList.add("hidden");
+    board.classList.add("hidden");
   }
+
+  keyboard.innerHTML = "";
+  board.innerHTML = "";
+
+  window.localStorage.setItem("boardStatus", board.innerHTML);
+  window.localStorage.setItem("keyboardStatus", keyboard.innerHTML);
+
+  window.localStorage.setItem("messageContent", message.innerHTML);
+
+  gamePlayed++;
+  window.localStorage.setItem("gamePlayed", gamePlayed);
 
   shareDataDisplay.innerHTML = `🍜🍡🍮🍤🍙🍣<br>${"✅".repeat(
     ticket
   )}${"❌".repeat(6 - ticket)}`;
+  window.localStorage.setItem("shareData", shareDataDisplay.innerHTML);
+
   gameStatus = "finish";
+  window.localStorage.setItem("gameStatus", gameStatus);
 
   window.setTimeout(() => {
     statsDisplay.classList.toggle("active");
-  }, 1000);
+  }, 2000);
 };

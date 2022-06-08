@@ -219,7 +219,7 @@ header {
   color: var(--blue);
 }
 
-#ticket.lastcoin {
+#ticket.lastTicket {
   background-color: var(--red);
   color: #ffffff;
 }
@@ -341,29 +341,27 @@ footer {
   text-align: center;
 }
 
-#message h1.won {
-  color: var(--green);
-  padding: 2em 0;
+#message .answer.won {
+  background-color: var(--green);
+  /* padding: 2em 0; */
 }
 
-#message h1.lost {
-  color: var(--red);
+#message .answer.lost {
+  background-color: var(--red);
 }
 
 #message .answer {
-  line-height: 2em;
-  width: 100%;
-  padding: 1em 0;
   text-align: center;
-  color: #ffffff;
   text-transform: uppercase;
-}
 
-#message .answer .password {
-  color: var(--green);
-  font-weight: 600;
   letter-spacing: 0.2em;
-  font-size: 1.1em;
+  font-size: 1.5em;
+  font-weight: 600;
+
+  background-color: var(--green);
+  color: #ffffff;
+  padding: 5px 5px 5px 12px;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.6);
 }
 
 #board {
@@ -380,18 +378,8 @@ footer {
   line-height: 1.2em;
 }
 
-#stats span.won,
-#board span.won {
-  background-color: var(--green);
-  color: #ffffff;
-  padding: 5px 5px 5px 12px;
-  border: 5px solid #ffffff;
-  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.6);
-}
-
-#board span.lost,
-#keyboard.lost,
-#keyboard.won {
+#board span.hidden,
+#keyboard.hidden {
   display: none;
 }
 
@@ -739,7 +727,7 @@ body.darkmode #ticket {
   color: #ffffff;
 }
 
-body.darkmode #ticket.lastcoin {
+body.darkmode #ticket.lastTicket {
   background-color: var(--red);
   color: var(--dark-mode-charcoal);
 }
