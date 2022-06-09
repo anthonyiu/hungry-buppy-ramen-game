@@ -21,17 +21,25 @@ const darkmodeSwitch = document.querySelector("#darkmodeSwitch");
 
 const darkmodeToggle = (status) => {
   let input = darkmodeSwitch.querySelector("label input");
-  if (status) {
-    input.checked = true;
-    document.body.classList.add("darkmode");
-    darkmodeStatus = true;
-    window.localStorage.setItem("darkmodeStatus", true);
-  } else {
-    input.checked = false;
-    document.body.classList.remove("darkmode");
-    darkmodeStatus = false;
-    window.localStorage.setItem("darkmodeStatus", false);
-  }
+
+  input.checked = status;
+  darkmodeStatus = status;
+  window.localStorage.setItem("darkmodeStatus", status);
+  status
+    ? document.body.classList.add("darkmode")
+    : document.body.classList.remove("darkmode");
+
+  // if (status) {
+  //   input.checked = true;
+  //   document.body.classList.add("darkmode");
+  //   darkmodeStatus = true;
+  //   window.localStorage.setItem("darkmodeStatus", true);
+  // } else {
+  //   input.checked = false;
+  //   document.body.classList.remove("darkmode");
+  //   darkmodeStatus = false;
+  //   window.localStorage.setItem("darkmodeStatus", false);
+  // }
 };
 
 darkmodeSwitch.addEventListener("click", () => {
@@ -73,25 +81,27 @@ var regex = /<br\s*[\/]?>/gi;
 
 const shareDataDisplay = document.querySelector("#shareData");
 
+const shareData = () => {
+  return {
+    text: `Hungry Buppy ${
+      currentWord().gameId
+    } #${ticket}/6 \n${shareDataDisplay.innerHTML.replace(regex, "\n")}`,
+  };
+};
+
 const shareButton = document.querySelector("#share");
 shareButton.addEventListener("click", () => {
-  let shareData = {
-    text: shareDataDisplay.innerHTML.replace(regex, "\n"),
-  };
-  navigator.share(shareData);
+  navigator.share(shareData());
 });
 
 const copyButton = document.querySelector("#copy");
 copyButton.addEventListener("click", () => {
-  let shareData = {
-    text: shareDataDisplay.innerHTML.replace(regex, "\n"),
-  };
-  navigator.clipboard.writeText(shareData.text);
+  navigator.clipboard.writeText(shareData().text);
   copyButton.querySelector("span.tooltiptext").innerHTML = "Copied!";
 });
 
 copyButton.addEventListener("mouseout", () => {
-  copyButton.querySelector("span.tooltiptext").innerHTML = "Copy to Clipboard";
+  copyButton.querySelector("span.tooltiptext").innerHTML = "Copy to clipboard";
 });
 
 // countDown
@@ -101,7 +111,9 @@ const countDown = () => {
     const now = new Date();
     let tomorrow = new Date(now);
     tomorrow.setDate(tomorrow.getDate() + 1);
+
     tomorrow.setHours(0, 0, 0, 0);
+
     // Find the distance between now and the count down date
     const distance = tomorrow.getTime() - now.getTime();
 
@@ -112,14 +124,15 @@ const countDown = () => {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.querySelector("#nextwordTimer").innerHTML = `${("0" + hours).slice(
-      -2
-    )}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
+    document.querySelector("#nextwordTimer").innerHTML = `Next word<br>${(
+      "0" + hours
+    ).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
 
-    if (distance < 0) {
-      clearInterval(timer);
-      newGame();
-      statsDisplay.classList.remove("active");
+    if (distance > 0 && distance < 2000) {
+      window.setTimeout(() => {
+        newGame();
+        statsDisplay.classList.remove("active");
+      }, 2000);
     }
   });
 };
@@ -134,6 +147,7 @@ const message = document.getElementById("message");
 const board = document.querySelector("#board > span");
 const statsDisplay = document.querySelector("#stats");
 const ticketDisplay = document.querySelector("#ticket");
+const historyData = document.querySelector("#historyData");
 
 const displayToggle = (e, block) => {
   e.style.display = block ? "block" : "none";
@@ -141,9 +155,8 @@ const displayToggle = (e, block) => {
 
 let gameWon = 0;
 let gamePlayed = 0;
-let ticket = 6;
-let gameStatus = "start";
-let keyboardStatus;
+let ticket;
+let gameStatus;
 let currentWordDashed;
 
 const newGame = function () {
@@ -154,14 +167,17 @@ const newGame = function () {
 
   blankBoard();
   blankKeyboard();
+  keyboard.classList.remove("hidden");
+  board.classList.remove("hidden");
+
   ticket = 6;
+  message.innerHTML = "";
 
   showEyes(ticket);
   showTicket(ticket);
   showFood(ticket);
 
   gameStatus = "start";
-  window.localStorage.setItem("gameId", currentWord().gameId);
 };
 
 const oldGame = () => {
@@ -170,6 +186,15 @@ const oldGame = () => {
 
   if (gameStatus !== "finish") {
     currentWordDashed = window.localStorage.getItem("boardStatus").split("");
+  } else {
+    window.setTimeout(() => {
+      message
+        .querySelector(".answer")
+        .classList.add("animate__animated", "animate__bounce");
+    }, 300);
+    window.setTimeout(() => {
+      statsDisplay.classList.toggle("active");
+    }, 1500);
   }
 
   keyboard.innerHTML = window.localStorage.getItem("keyboardStatus");
@@ -189,6 +214,7 @@ const oldGame = () => {
 };
 
 const showTicket = (ticket) => {
+  ticketDisplay.classList.remove("lastTicket");
   ticketDisplay.innerHTML = `<i class="fa-solid fa-ticket"></i>&nbsp;x&nbsp;${ticket}`;
 
   if (ticket <= 1 && !ticketDisplay.classList.contains("lastTicket")) {
@@ -215,13 +241,15 @@ const showFood = (target) => {
 };
 
 const blankKeyboard = () => {
+  keyboard.innerHTML = "";
   letters.split("").forEach((letter) => {
     const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
-    keyboard.insertAdjacentHTML("beforeend", html);
+    keyboard.innerHTML += html;
   });
 };
 
 const blankBoard = () => {
+  board.innerHTML = "";
   currentWordDashed = currentWord()
     .todayWord.split("")
     .map((letter) => {
@@ -237,6 +265,12 @@ const deductFood = (target) => {
   displayToggle(document.querySelector(`#food${6 - target}`), false);
 };
 
+const showHistoryData = () => {
+  historyData.innerHTML = `Played: ${gamePlayed} | Win %: ${
+    Math.round((gameWon / gamePlayed) * 1000) / 10
+  }`;
+};
+
 window.addEventListener("DOMContentLoaded", () => {
   darkmodeStatus =
     window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
@@ -246,6 +280,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   gamePlayed = Number(window.localStorage.getItem("gamePlayed")) || 0;
 
+  showHistoryData();
   // if (!window.localStorage.getItem("gameId")) {
   //   document.querySelector("#how-to-modal").classList.add("active");
   // }
@@ -304,6 +339,8 @@ const checkLetter = function (e) {
       deactivateLetter(false, pressedLetter);
     }
 
+    window.localStorage.setItem("gameId", currentWord().gameId);
+
     window.localStorage.setItem("ticket", ticket);
 
     window.localStorage.setItem("boardStatus", board.innerHTML);
@@ -328,16 +365,7 @@ const finish = function (success) {
       currentWord().todayWord
     }</span>`;
 
-    board.classList.add("hidden");
-    keyboard.classList.add("hidden");
     showEyes("won");
-    console.log(message);
-    window.setTimeout(() => {
-      console.log(message);
-      message
-        .querySelector(".answer")
-        .classList.add("animate__animated", "animate__bounce");
-    }, 300);
 
     gameWon++;
     window.localStorage.setItem("gameWon", gameWon);
@@ -345,13 +373,15 @@ const finish = function (success) {
     message.innerHTML = `<span class="answer lost">${
       currentWord().todayWord
     }</span>`;
-
-    keyboard.classList.add("hidden");
-    board.classList.add("hidden");
   }
+  keyboard.classList.add("hidden");
+  board.classList.add("hidden");
 
-  keyboard.innerHTML = "";
-  board.innerHTML = "";
+  window.setTimeout(() => {
+    message
+      .querySelector(".answer")
+      .classList.add("animate__animated", "animate__bounce");
+  }, 300);
 
   window.localStorage.setItem("boardStatus", board.innerHTML);
   window.localStorage.setItem("keyboardStatus", keyboard.innerHTML);
@@ -368,6 +398,8 @@ const finish = function (success) {
 
   gameStatus = "finish";
   window.localStorage.setItem("gameStatus", gameStatus);
+
+  showHistoryData();
 
   window.setTimeout(() => {
     statsDisplay.classList.toggle("active");

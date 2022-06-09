@@ -48,16 +48,18 @@
             <a title="Close" class="modal-close">X</a>
             <h1>Stats</h1>
             <div class="modal-content">
-              <div id="shareData">✅<br />❌</div>
+              <div id="historyData"></div>
+              <div id="shareData"></div>
               <div id="nextwordTimer"></div>
-
-              <a id="share" class="btn"
-                ><i class="fa-solid fa-share-nodes fa-lg"></i
-              ></a>
-              <a id="copy" class="btn tooltip"
-                ><i class="fa-regular fa-copy fa-lg"></i>
-                <span class="tooltiptext">Copy to Clipboard</span>
-              </a>
+              <div id="sharebuttonContainer">
+                <a id="share" class="btn"
+                  ><i class="fa-solid fa-share-nodes fa-fw"></i
+                ></a>
+                <a id="copy" class="btn tooltip"
+                  ><i class="fa-regular fa-copy fa-fw"></i>
+                  <span class="tooltiptext">Copy to Clipboard</span>
+                </a>
+              </div>
             </div>
           </div>
           <div class="overlay"></div>
@@ -149,7 +151,6 @@
         <a id="menuClose" href="#" title="Close" class="menu-close">X</a>
         <div class="menu-title">Menu</div>
         <ul>
-          <li></li>
           <li>
             <a class="how-to modal-open" href="#how-to-modal"
               >?&nbsp;How to Play</a

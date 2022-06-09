@@ -15,6 +15,7 @@
   --opeasea-marina-blue: #e2e6ef;
   --opeasea-aqua: #2bcde4;
 
+  --header-width: 130px;
   --header-height: 80px;
   --footer-height: 220px;
   --buppy-img-padding: 1rem;
@@ -144,7 +145,7 @@ header {
 
   font-size: 2em;
 
-  flex: 0 0 120px;
+  flex: 0 0 var(--header-width);
   color: #ffffff;
   z-index: 100;
 }
@@ -155,6 +156,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-right: 0.2em;
 }
 
 .header-left > a:hover {
@@ -162,7 +164,11 @@ header {
   color: var(--yellow);
 }
 
-.header-left > a:first-of-type {
+/* .header-left > a:first-of-type {
+  margin-right: 0.2em;
+} */
+
+.header-left > a:last-of-type {
   margin-right: 0.2em;
 }
 
@@ -189,7 +195,7 @@ header {
 .header-right {
   display: flex;
   flex-wrap: wrap;
-  flex: 0 0 120px;
+  flex: 0 0 var(--header-width);
   justify-content: flex-end;
   align-items: flex-end;
 
@@ -200,7 +206,7 @@ header {
 
 .header-right > div {
   display: flex;
-  flex: 1 1 120px;
+  flex: 1 1 var(--header-width);
   justify-content: center;
   line-height: 1em;
   padding: 0.5em 1em 0.3em;
@@ -646,6 +652,10 @@ nav .overlay {
   font-size: 0.5em;
 }
 
+#nextwordTimer {
+  text-transform: uppercase;
+}
+
 .tooltip {
   position: relative;
   /* display: inline-block; */
@@ -857,16 +867,16 @@ body.darkmode .tooltip .tooltiptext::after {
 
 @media screen and (max-width: 940px) {
   header {
+    font-size: 0.9rem;
     flex-wrap: wrap;
     padding-bottom: 0;
   }
 
   .header-left {
-    flex-basis: 1em;
     margin-top: 0.2em;
   }
   .title {
-    margin-left: -1em;
+    margin-left: -130px;
     margin-top: 0.2em;
   }
 

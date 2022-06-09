@@ -62,8 +62,10 @@ const words = [
 // ];
 
 const currentWord = () => {
-  const startDate = new Date("2022-05-24");
+  const startDate = new Date("2022-06-03");
+  startDate.setHours(0, 0, 0, 0);
   const today = new Date();
+  today.setHours(0, 0, 0, 0);
   const gameId = Math.floor(
     (today.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)
   );
