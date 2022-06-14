@@ -36,14 +36,16 @@
   <body class="flex-container">
     <header class="flex-item">
       <div class="header-left">
-        <a id="menuOpen" href="#"><i class="fa-solid fa-bars fa-fw"></i></a>
-        <a class="stat-open modal-open" href="#"
+        <a title="Menu" id="menuOpen" href="#"
+          ><i class="fa-solid fa-bars fa-fw"></i
+        ></a>
+        <a title="Statistics" class="stat-open modal-open" href="#"
           ><i class="fa-solid fa-chart-column fa-fw"></i
         ></a>
         <div id="stats" class="modal-window">
           <div class="modal-body">
             <a title="Close" class="modal-close">X</a>
-            <h1>Stats</h1>
+            <h1>Statistics</h1>
             <div class="modal-content">
               <div id="statsData"></div>
               <div class="stats-bottom">
@@ -217,6 +219,20 @@
           </li>
         </ul>
 
+        <div class="menu-title">Setting</div>
+        <ul>
+          <li>
+            <a id="darkmodeSwitch"
+              ><i class="fa-solid fa-moon fa-fw"></i>&nbsp;Dark Mode<label
+                class="switch"
+              >
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </a>
+          </li>
+        </ul>
+
         <div class="menu-title">Find Us on</div>
         <ul>
           <li>
@@ -235,20 +251,6 @@
             <a href="https://twitter.com/HungryBuppynft" target="_blank"
               ><i class="fa-brands fa-twitter fa-fw"></i>&nbsp;Twitter</a
             >
-          </li>
-        </ul>
-
-        <div class="menu-title">Setting</div>
-        <ul>
-          <li>
-            <a id="darkmodeSwitch"
-              ><i class="fa-solid fa-moon fa-fw"></i>&nbsp;Dark Mode<label
-                class="switch"
-              >
-                <input type="checkbox" />
-                <span class="slider"></span>
-              </label>
-            </a>
           </li>
         </ul>
       </div>
