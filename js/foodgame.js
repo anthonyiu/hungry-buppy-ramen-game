@@ -121,7 +121,7 @@ const countDown = () => {
         statsDisplay.classList.remove("active");
       }, 800);
     }
-  });
+  }, 1000);
 };
 
 countDown();
