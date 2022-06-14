@@ -621,6 +621,10 @@ nav .overlay {
   font-size: 0.5em;
 }
 
+#stats .modal-body {
+  padding: 2em 1.5em;
+}
+
 #statsData {
   display: flex;
   flex-wrap: wrap;
@@ -651,8 +655,27 @@ nav .overlay {
   line-height: 1;
 }
 
-#nextwordTimer {
-  text-transform: uppercase;
+.stats-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.stats-bottom > div {
+  flex: 1 1 50%;
+}
+
+.stats-bottom > div:first-of-type {
+  padding-right: 1.5em;
+}
+
+.stats-bottom > div:last-of-type {
+  padding-left: 1.5em;
+}
+
+.share {
+  border-left: 1px solid #fff;
 }
 
 .tooltip {
@@ -662,20 +685,21 @@ nav .overlay {
 
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 140px;
+  width: 80px;
   background-color: var(--dark-blue);
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px;
+  padding: 8px 5px;
   position: absolute;
   z-index: 1;
   bottom: 150%;
   left: 50%;
-  margin-left: -75px;
+  margin-left: -40px;
   opacity: 0;
   transition: opacity 0.3s;
   font-family: "Poppins", sans-serif;
+  line-height: 1.2;
 }
 
 .tooltip .tooltiptext::after {
@@ -914,6 +938,22 @@ body.darkmode .tooltip .tooltiptext::after {
 
   .stats-container {
     flex-basis: 50%;
+  }
+
+  .stats-bottom > div {
+    flex-basis: 100%;
+  }
+
+  .stats-bottom > div:first-of-type {
+    padding-right: 0;
+  }
+
+  .stats-bottom > div:last-of-type {
+    padding-left: 0;
+  }
+
+  .share {
+    border-left: 0;
   }
 }
 

@@ -111,7 +111,7 @@ const countDown = () => {
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-    document.querySelector("#nextwordTimer").innerHTML = `Next word<br>${(
+    document.querySelector("#nextwordTimer").innerHTML = `<h1>Next word</h1>${(
       "0" + hours
     ).slice(-2)}:${("0" + minutes).slice(-2)}:${("0" + seconds).slice(-2)}`;
 
@@ -164,7 +164,7 @@ const newGame = function () {
 
   gameStatus = "start";
 
-  shareDataDisplay.innerHTML = "";
+  // shareDataDisplay.innerHTML = "";
 };
 
 const oldGame = () => {
@@ -197,7 +197,7 @@ const oldGame = () => {
   showTicket(ticket);
   showFood(ticket);
 
-  shareDataDisplay.innerHTML = window.localStorage.getItem("shareData");
+  // shareDataDisplay.innerHTML = window.localStorage.getItem("shareData");
 };
 
 const showTicket = (ticket) => {
@@ -267,7 +267,7 @@ const showStatsData = () => {
   </div>
   <div class="stats-container">
     <div class="value">${foodCollected}</div>
-    <div class="label">Food Collected</div>
+    <div class="label">Food<br>Collected</div>
   </div>
   <div class="stats-container">
     <div class="value">${
@@ -288,6 +288,9 @@ window.addEventListener("DOMContentLoaded", () => {
   gamePlayed = Number(window.localStorage.getItem("gamePlayed")) || 0;
 
   foodCollected = Number(window.localStorage.getItem("foodCollected")) || 0;
+
+  shareDataDisplay.innerHTML =
+    window.localStorage.getItem("shareData") || "N/A";
 
   showStatsData();
 
