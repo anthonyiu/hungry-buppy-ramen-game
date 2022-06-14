@@ -601,9 +601,9 @@ nav .overlay {
   color: #aaaaaa;
 }
 
-.modal-window div:not(:last-of-type) {
+/* .modal-window div:not(:last-of-type) {
   margin-bottom: 15px;
-}
+} */
 
 .modal-content {
   line-height: 2rem;
@@ -617,17 +617,33 @@ nav .overlay {
   letter-spacing: 0.01em;
 }
 
-#stats .modal-close {
-  font-size: 0.5em;
+#stats {
+  font-size: 1.2rem;
 }
 
 #stats .modal-body {
-  padding: 2em 1.5em;
+  padding: 2.5em 1.5em;
 }
 
 #statsData {
   display: flex;
   flex-wrap: wrap;
+}
+
+#stats.modal-window .modal-content > div {
+  margin-bottom: 2em;
+}
+
+#stats.modal-window .modal-content > div:last-of-type {
+  margin-bottom: 0;
+}
+
+#shareData {
+  margin-bottom: 20px;
+}
+
+.modal-window div.stats-container {
+  margin-bottom: 0;
 }
 
 .stats-container {
@@ -644,6 +660,7 @@ nav .overlay {
   justify-content: center;
   text-align: center;
   font-variant-numeric: proportional-nums;
+  margin-bottom: 15px;
 }
 
 .stats-container .label {
@@ -946,6 +963,7 @@ body.darkmode .tooltip .tooltiptext::after {
 
   .stats-bottom > div:first-of-type {
     padding-right: 0;
+    margin-bottom: 2em;
   }
 
   .stats-bottom > div:last-of-type {

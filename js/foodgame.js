@@ -59,7 +59,8 @@ modalClose.forEach((e) => {
 const overlayClose = document.querySelectorAll(".overlay");
 overlayClose.forEach((e) => {
   e.addEventListener("click", () => {
-    e.parentElement.classList.toggle("active");
+    modalToggle(e.parentElement);
+    // e.parentElement.classList.toggle("active");
   });
 });
 
