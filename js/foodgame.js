@@ -72,9 +72,9 @@ const shareDataDisplay = document.querySelector("#shareData");
 
 const shareData = () => {
   return {
-    text: `Hungry Buppy ${
+    text: `Hungry Buppy #${
       currentWord().gameId
-    } #${ticket}/6 \n${shareDataDisplay.innerHTML.replace(regex, "\n")}`,
+    } ${ticket}/6 \n${shareDataDisplay.innerHTML.replace(regex, "\n")}`,
   };
 };
 
@@ -284,6 +284,15 @@ window.addEventListener("DOMContentLoaded", () => {
     window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
   darkmodeToggle(darkmodeStatus);
 
+  if (
+    !window.localStorage.getItem("gameId") ||
+    Number(window.localStorage.getItem("gameId")) !== currentWord().gameId
+  ) {
+    newGame();
+  } else {
+    oldGame();
+  }
+
   gameWon = Number(window.localStorage.getItem("gameWon")) || 0;
 
   gamePlayed = Number(window.localStorage.getItem("gamePlayed")) || 0;
@@ -294,15 +303,6 @@ window.addEventListener("DOMContentLoaded", () => {
     window.localStorage.getItem("shareData") || "N/A";
 
   showStatsData();
-
-  if (
-    !window.localStorage.getItem("gameId") ||
-    Number(window.localStorage.getItem("gameId")) !== currentWord().gameId
-  ) {
-    newGame();
-  } else {
-    oldGame();
-  }
 
   const allLetters = document.querySelectorAll(".letter.unhit");
   allLetters.forEach((e) =>
