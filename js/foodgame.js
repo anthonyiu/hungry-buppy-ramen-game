@@ -165,7 +165,7 @@ const newGame = function () {
 
   gameStatus = "start";
 
-  // shareDataDisplay.innerHTML = "";
+  shareDataDisplay.innerHTML = "N/A";
 };
 
 const oldGame = () => {
