@@ -3,8 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <!-- viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hungry Buppy NFT | - The Ramen Game -</title>
+
+    <!-- title -->
+    <title>Buppy Word Game - Hungry Buppy NFT</title>
+    <meta property="og:title" content="Buppy Word Game - Hungry Buppy NFT" />
+    <meta name="twitter:title" content="Buppy Word Game - Hungry Buppy NFT" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="Buppy Word Game - Hungry Buppy NFT"
+    />
+    <meta
+      name="application-name"
+      content="Buppy Word Game - Hungry Buppy NFT"
+    />
+
+    <!-- url -->
+    <link rel="canonical" href="http://···" />
+    <meta property="og:url" content="http://···" />
+    <meta name="twitter:url" content="http://···" />
+
+    <!-- description -->
+    <meta
+      name="description"
+      content="A word-guessing game developed by the creator of Hungry Buppy NFT to promote world food and kill time :)"
+    />
+    <meta
+      property="og:description"
+      content="A word-guessing game developed by the creator of Hungry Buppy NFT to promote world food and kill time :)"
+    />
+    <meta
+      name="twitter:description"
+      content="A word-guessing game developed by the creator of Hungry Buppy NFT to promote world food and kill time :)"
+    />
+
+    <!-- Manifest and Theme Colour -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#004d7c" />
+
+    <!-- Icon -->
+
+    <link
+      href="./img/buppy_game_icon_32.png"
+      rel="icon shortcut"
+      sizes="32x32"
+    />
+    <link href="./img/buppy_game_icon_192.png" rel="apple-touch-icon" />
+
+    <!-- Import Fonts and JS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -17,33 +65,254 @@
       rel="stylesheet"
     />
 
-    <link href="css/ramen.css" rel="stylesheet" />
-    <link rel="preload" href="img/0.png" as="image" />
-    <link rel="preload" href="img/1.png" as="image" />
-    <link rel="preload" href="img/2.png" as="image" />
-    <link rel="preload" href="img/3.png" as="image" />
-    <link rel="preload" href="img/4.png" as="image" />
-    <link rel="preload" href="img/5.png" as="image" />
-    <link rel="preload" href="img/6.png" as="image" />
-    <script
-      src="https://kit.fontawesome.com/7053c90460.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <main>
-      <div id="container">
-        <div id="title">
-          Hungry&nbsp;Buppy&nbsp;NFT
-          <div class="subtitle">-&nbsp;The&nbsp;Ramen&nbsp;Game&nbsp;-</div>
-          <div id="timer">0:00:00</div>
-        </div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
 
-        <div id="board"></div>
-        <div id="hangin-dude"></div>
-        <div id="alphabet"></div>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link href="css/foodgame.css" rel="stylesheet" />
+  </head>
+  <body class="flex-container">
+    <header class="flex-item">
+      <div class="header-left">
+        <a title="Menu" id="menuOpen" href="#"
+          ><i class="fa-solid fa-bars fa-fw"></i
+        ></a>
+        <a title="Statistics" class="stat-open modal-open" href="#"
+          ><i class="fa-solid fa-chart-column fa-fw"></i
+        ></a>
+        <div id="stats" class="modal-window">
+          <div class="modal-body">
+            <a title="Close" class="modal-close">X</a>
+            <h1>Statistics</h1>
+            <div class="modal-content">
+              <div id="statsData"></div>
+              <div class="stats-bottom">
+                <div id="nextwordTimer"></div>
+                <div class="share">
+                  <h1>Today's results</h1>
+                  <div id="shareData"></div>
+                  <div>
+                    <a id="share" class="btn tooltip"
+                      ><i class="fa-solid fa-share-nodes fa-fw"></i
+                      ><span class="tooltiptext">Share</span></a
+                    >
+                    <a id="copy" class="btn tooltip"
+                      ><i class="fa-regular fa-copy fa-fw"></i>
+                      <span class="tooltiptext">Copy to Clipboard</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="overlay"></div>
+        </div>
+      </div>
+      <div class="title">
+        <span class="fullTitle">Buppy Word Game</span><br />
+        <span class="subTitle">- Hungry Buppy NFT-</span>
+      </div>
+
+      <div class="header-right">
+        <div id="ticket"><i class="fa-solid fa-ticket"></i> x 0</div>
+      </div>
+    </header>
+    <main class="flex-item">
+      <div class="container">
+        <div id="buppy">
+          <img class="eyes" id="eyes0" src="img/eyes/eyes0.png" alt="Eyes 0" />
+          <img class="eyes" id="eyes1" src="img/eyes/eyes1.png" alt="Eyes 1" />
+          <img class="eyes" id="eyes2" src="img/eyes/eyes2.png" alt="Eyes 2" />
+          <img class="eyes" id="eyes3" src="img/eyes/eyes3.png" alt="Eyes 3" />
+          <img class="eyes" id="eyes4" src="img/eyes/eyes4.png" alt="Eyes 4" />
+          <img class="eyes" id="eyes5" src="img/eyes/eyes5.png" alt="Eyes 5" />
+          <img
+            class="eyes"
+            id="eyes6"
+            src="img/eyes/eyes6.png"
+            alt="Eyes Lost"
+          />
+          <img
+            class="eyes"
+            id="eyeswon"
+            src="img/eyes/eyeswon.png"
+            alt="Eyes Win"
+          />
+
+          <img
+            class="food layer2"
+            id="food1"
+            src="img/food/food1.png"
+            alt="Salmon Sushi"
+          />
+          <img
+            class="food layer2"
+            id="food2"
+            src="img/food/food2.png"
+            alt="Omusubi"
+          />
+          <img
+            class="food layer2"
+            id="food3"
+            src="img/food/food3.png"
+            alt="Tempura Set"
+          />
+          <img
+            class="food layer1"
+            id="food4"
+            src="img/food/food4.png"
+            alt="Pudding"
+          />
+          <img
+            class="food layer1"
+            id="food5"
+            src="img/food/food5.png"
+            alt="Hanami Dango"
+          />
+          <img
+            class="food layer1"
+            id="food6"
+            src="img/food/food6.png"
+            alt="Ramen"
+          />
+
+          <img id="bodyTable" src="img/body_table.png" alt="Body and Table" />
+
+          <img id="ramenBg" src="img/board_bg.png" alt="Background" />
+        </div>
       </div>
     </main>
-    <script type="text/javascript" src="js/ramen.js"></script>
+    <footer class="flex-item">
+      <div class="container">
+        <div id="board"><span></span></div>
+
+        <div id="keyboard"></div>
+      </div>
+    </footer>
+    <nav id="menu">
+      <div class="menu-body">
+        <a id="menuClose" href="#" title="Close" class="menu-close">X</a>
+        <div class="menu-title">Menu</div>
+        <ul>
+          <li>
+            <a class="how-to modal-open" href="#how-to-modal"
+              >?&nbsp;How to Play</a
+            >
+            <div id="how-to-modal" class="modal-window">
+              <div class="modal-body">
+                <a title="Close" class="modal-close">X</a>
+                <h1>How to Play</h1>
+                <div class="modal-content">
+                  <p>
+                    The Hungry Buppy in the middle would like to enjoy all the 6
+                    dishes on the table. As the Buppy's trainer, you can help
+                    Buppy guess the word and get the tickets for redeeming the
+                    food.
+                  </p>
+                  <p>
+                    For every correct guess, the letter entered will turn green
+                    and will be revealed in the guessing area. When all letters
+                    are revealed, you win the game.
+                  </p>
+                  <p>
+                    For every wrong guess, the letter entered will turn red and
+                    one ticket will be deducted. When there is no ticket left
+                    (i.e. ticket = 0), you lose.
+                  </p>
+                  <p>
+                    You can use either the mouse or the keyboard to enter your
+                    answer.
+                  </p>
+                  <p>
+                    At the end of the game, you can share the result of the day
+                    to your social media by simply clicking on the
+                    <i class="fa-solid fa-share-nodes fa-fw"></i> button or copy
+                    the result to the clipboard using the
+                    <i class="fa-regular fa-copy fa-fw"></i> button.
+                  </p>
+                  <p>A new word will be available each day at midnight.</p>
+                  <p>Good luck!</p>
+                </div>
+              </div>
+              <div class="overlay"></div>
+            </div>
+          </li>
+          <li>
+            <a class="about modal-open" href="#about-modal"
+              >!&nbsp;About the Game</a
+            >
+            <div id="about-modal" class="modal-window overlay">
+              <div class="modal-body">
+                <a title="Close" class="modal-close">X</a>
+                <h1>About the Game</h1>
+                <div class="buppy-img"><img src="img/buppy_ani_1.gif" /></div>
+                <div class="modal-content">
+                  <p>
+                    Inspired by Wordle and the conventional hangman game, this
+                    word-guessing game was developed by the creator of Hungry
+                    Buppy NFT as part of the project to promote world food and
+                    kill time😁. If you love this game, show your support to us
+                    by purchasing an NFT of our collection at
+                    <a
+                      class="external-link"
+                      href="https://opensea.io/collection/hungry-buppy-nft"
+                      >OpenSea</a
+                    >.
+                  </p>
+                </div>
+              </div>
+              <div class="overlay"></div>
+            </div>
+          </li>
+        </ul>
+
+        <div class="menu-title">Setting</div>
+        <ul>
+          <li>
+            <a id="darkmodeSwitch"
+              ><i class="fa-solid fa-moon fa-fw"></i>&nbsp;Dark Mode<label
+                class="switch"
+              >
+                <input type="checkbox" />
+                <span class="slider"></span>
+              </label>
+            </a>
+          </li>
+        </ul>
+
+        <div class="menu-title">Find Us on</div>
+        <ul>
+          <li>
+            <a
+              href="https://opensea.io/collection/hungry-buppy-nft"
+              target="_blank"
+              ><img src="img/opensea.svg" alt="OpenSea" />&nbsp;OpenSea</a
+            >
+          </li>
+          <li>
+            <a href="https://www.instagram.com/hungrybuppynft/" target="_blank"
+              ><i class="fa-brands fa-instagram fa-fw"></i>&nbsp;Instagram</a
+            >
+          </li>
+          <li>
+            <a href="https://twitter.com/HungryBuppynft" target="_blank"
+              ><i class="fa-brands fa-twitter fa-fw"></i>&nbsp;Twitter</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="overlay"></div>
+    </nav>
+
+    <script src="js/foodgame.js" type="module"></script>
   </body>
 </html>
