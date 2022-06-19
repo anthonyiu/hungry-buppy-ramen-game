@@ -60,6 +60,9 @@ body {
   scrollbar-width: auto;
   scrollbar-color: #222222 #e4e4e4;
   scrollbar-gutter: stable;
+
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 .switch {

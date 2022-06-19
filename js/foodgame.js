@@ -280,6 +280,14 @@ const showStatsData = () => {
 };
 
 window.addEventListener("DOMContentLoaded", () => {
+  // vh hix
+
+  // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+  let vh = window.innerHeight * 0.01;
+  // Then we set the value in the --vh custom property to the root of the document
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+
+  // load darkmode
   darkmodeStatus =
     window.localStorage.getItem("darkmodeStatus") === "true" ? true : false;
   darkmodeToggle(darkmodeStatus);
@@ -409,3 +417,10 @@ const finish = function (success) {
     statsDisplay.classList.toggle("active");
   }, 2000);
 };
+
+// vh fix eventlistener
+window.addEventListener("resize", () => {
+  // We execute the same script as before
+  let vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty("--vh", `${vh}px`);
+});
