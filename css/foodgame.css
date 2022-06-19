@@ -183,14 +183,15 @@ header {
   flex: 1 1 280px;
 }
 
-.abbrTitle {
-  display: none;
+.fullTitle {
+  white-space: nowrap;
 }
 
-.subtitle {
+.subTitle {
   text-align: center;
-  font-size: 0.8em;
+  font-size: 0.65em;
   color: #ffffff;
+  white-space: nowrap;
 }
 
 .header-right {
@@ -472,7 +473,7 @@ nav li {
   position: relative;
 }
 
-nav li a {
+nav li > a {
   margin: 0;
   list-style: none;
   display: block;
@@ -615,10 +616,39 @@ nav .overlay {
   font-family: "Poppins", sans-serif;
   font-size: 1.1em;
   letter-spacing: 0.01em;
+  user-select: text;
 }
 
-#stats {
+.modal-content p .icon {
+  width: 1.1em;
+}
+
+.modal-content p a,
+.modal-content p a:active,
+.modal-content p a:visited,
+.modal-content p a:focus {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+.modal-content p a:hover {
+  color: var(--yellow);
+}
+
+.modal-content p a:active #stats {
   font-size: 1.2rem;
+}
+
+a.external-link::after {
+  display: inline-block;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  font: var(--fa-font-solid);
+  content: "\f08e";
+  margin-left: 3px;
+  font-size: 0.83em;
+  vertical-align: super;
 }
 
 #stats .modal-body {
@@ -943,14 +973,6 @@ body.darkmode .tooltip .tooltiptext::after {
 
   footer {
     font-size: 1rem;
-  }
-
-  .fullTitle {
-    display: none;
-  }
-
-  .abbrTitle {
-    display: inline;
   }
 
   .stats-container {

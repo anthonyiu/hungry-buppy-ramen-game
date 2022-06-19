@@ -1,39 +1,39 @@
 {
-  "short_name": "HBNFT The Word Game",
-  "name": "Hungry Buppy NFT | The Word Game",
+  "short_name": "Buppy Word Game",
+  "name": "Buppy Word Game by Hungry Buppy NFT",
   "icons": [
     {
-      "src": "images/wordle_logo_48x48.png",
+      "src": "img/buppy_game_icon_48x48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "images/wordle_logo_72x72.png",
+      "src": "img/buppy_game_icon_72x72.png",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "images/wordle_logo_96x96.png",
+      "src": "img/buppy_game_icon_96x96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
     {
-      "src": "images/wordle_logo_144x144.png",
+      "src": "img/buppy_game_icon_144x144.png",
       "type": "image/png",
       "sizes": "144x144"
     },
     {
-      "src": "images/wordle_logo_168x168.png",
+      "src": "img/buppy_game_icon_168x168.png",
       "type": "image/png",
       "sizes": "168x168"
     },
     {
-      "src": "images/wordle_logo_192x192.png",
+      "src": "img/buppy_game_icon_192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "images/wordle_logo_512x512.png",
+      "src": "img/buppy_game_icon_512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
