@@ -72,9 +72,9 @@ const shareDataDisplay = document.querySelector("#shareData");
 
 const shareData = () => {
   return {
-    text: `Hungry Buppy #${
+    text: `Buppy Word Game \n#${
       currentWord().gameId
-    } ${ticket}/6 \n${shareDataDisplay.innerHTML.replace(regex, "\n")}`,
+    } ${ticket}/6 \n\n${shareDataDisplay.innerHTML.replace(regex, "\n")}`,
   };
 };
 
