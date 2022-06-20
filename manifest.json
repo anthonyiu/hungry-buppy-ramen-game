@@ -3,17 +3,17 @@
   "name": "Buppy Word Game by Hungry Buppy NFT",
   "icons": [
     {
-      "src": "img/buppy_game_icon_4.png",
+      "src": "img/buppy_game_icon_48.png",
       "type": "image/png",
       "sizes": "48x48"
     },
     {
-      "src": "img/buppy_game_icon_7.png",
+      "src": "img/buppy_game_icon_72.png",
       "type": "image/png",
       "sizes": "72x72"
     },
     {
-      "src": "img/buppy_game_icon_9.png",
+      "src": "img/buppy_game_icon_96.png",
       "type": "image/png",
       "sizes": "96x96"
     },
