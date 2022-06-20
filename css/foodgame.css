@@ -146,14 +146,13 @@ header {
   align-items: center;
   text-align: center;
 
-  font-size: 2em;
-
   flex: 0 0 var(--header-width);
   color: #ffffff;
   z-index: 100;
 }
 
 .header-left > a {
+  font-size: 2em;
   color: #ffffff;
   text-decoration: none;
   display: flex;
