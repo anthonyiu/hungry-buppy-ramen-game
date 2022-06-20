@@ -312,7 +312,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
   showStatsData();
 
-  const allLetters = document.querySelectorAll(".letter.unhit");
+  const allLetters = keyboard.querySelectorAll(".letter.unhit");
   allLetters.forEach((e) =>
     e.addEventListener("click", (input) => {
       checkLetter(input.target.textContent);
