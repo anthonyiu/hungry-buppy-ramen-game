@@ -70,6 +70,7 @@ const words = [
   "raisin",
   "apple pie",
   "bell pepper",
+  "buffalo wings",
 ];
 
 const currentWord = () => {
