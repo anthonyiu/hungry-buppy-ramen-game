@@ -811,7 +811,7 @@ body.darkmode #ticket {
 
 body.darkmode #ticket.lastTicket {
   background-color: var(--red);
-  color: var(--dark-mode-charcoal);
+  color: #ffffff;
 }
 
 body.darkmode .modal-window > .modal-body {
