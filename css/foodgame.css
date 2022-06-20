@@ -534,6 +534,12 @@ nav .overlay {
   display: flex;
 }
 
+/* .example .flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+} */
+
 .example {
   pointer-events: none;
 }
@@ -546,9 +552,21 @@ nav .overlay {
   font-size: 1.5em;
   color: #ffffff;
   letter-spacing: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+
+  line-height: 1.2em;
+  margin-right: 10px;
+}
+
+.example .lost {
+  background-color: var(--red);
+  padding: 5px 5px 5px 12px;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.6);
+
+  font-size: 1.5em;
+  color: #ffffff;
+  letter-spacing: 0.4rem;
   text-transform: uppercase;
   text-align: center;
 
@@ -643,6 +661,14 @@ nav .overlay {
   font-size: 1.1em;
   letter-spacing: 0.01em;
   user-select: text;
+}
+
+.modal-content .label {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.8em;
+  letter-spacing: 0.01em;
+  user-select: text;
+  text-align: center;
 }
 
 .modal-content p .icon {
