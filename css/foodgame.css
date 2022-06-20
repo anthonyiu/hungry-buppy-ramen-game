@@ -531,6 +531,31 @@ nav .overlay {
   color: var(--dark-blue-tint);
 }
 
+nav .example.flex {
+  display: flex;
+}
+
+nav .example a {
+  pointer-events: none;
+}
+
+nav .example .won {
+  background-color: var(--green);
+  padding: 5px 5px 5px 12px;
+  text-shadow: 3px 4px 0px rgba(0, 0, 0, 0.6);
+
+  font-size: 1.5em;
+  color: #ffffff;
+  letter-spacing: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  text-align: center;
+
+  line-height: 1.2em;
+}
+
 /* Modal */
 
 .overlay {
