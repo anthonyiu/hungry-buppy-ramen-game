@@ -536,6 +536,7 @@ nav .overlay {
 
 .example.flex.flex-wrap {
   flex-wrap: wrap;
+  gap: 12px;
 }
 
 .example {
@@ -554,7 +555,6 @@ nav .overlay {
   text-align: center;
 
   line-height: 1.2em;
-  margin-right: 10px;
 }
 
 .example .lost {
