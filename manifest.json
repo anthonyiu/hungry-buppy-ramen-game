@@ -38,7 +38,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "https://www.nytimes.com/games/wordle",
+  "start_url": "https://buppy.netlify.app",
   "background_color": "#004d7c",
   "display": "standalone",
   "theme_color": "#004d7c",
