@@ -534,11 +534,9 @@ nav .overlay {
   display: flex;
 }
 
-/* .example .flex-center {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
+.example.flex.flex-wrap {
+  flex-wrap: wrap;
+}
 
 .example {
   pointer-events: none;
