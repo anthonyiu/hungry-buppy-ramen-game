@@ -612,7 +612,7 @@ nav .overlay {
   width: 50vw;
   max-width: 500px;
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   padding: 2em;
@@ -620,6 +620,11 @@ nav .overlay {
   overflow-y: auto;
   max-height: 80%;
   z-index: 1000;
+  transition: all 0.3s;
+}
+
+.modal-window.active > .modal-body {
+  top: 50%;
 }
 
 .modal-window header {
