@@ -349,7 +349,7 @@ footer {
 #board {
   font-size: 1.5em;
   color: #ffffff;
-  letter-spacing: 0.4rem;
+  letter-spacing: 0.1em;
   display: flex;
   align-items: center;
   justify-content: center;
