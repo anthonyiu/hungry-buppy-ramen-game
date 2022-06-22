@@ -172,6 +172,10 @@ const oldGame = () => {
   gameStatus = window.localStorage.getItem("gameStatus");
   board.innerHTML = window.localStorage.getItem("boardStatus");
   keyboard.innerHTML = window.localStorage.getItem("keyboardStatus");
+
+  // Add eventlistener of keyboard after loading from local storage
+  keyboardClickEventListener();
+
   ticket = Number(window.localStorage.getItem("ticket"));
 
   if (gameStatus !== "finish") {
@@ -231,9 +235,19 @@ const showFood = (target) => {
 const blankKeyboard = () => {
   keyboard.innerHTML = "";
   letters.split("").forEach((letter) => {
-    const html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
+    let html = `<div class="letter unhit" id="letter${letter}">${letter}</div>`;
     keyboard.innerHTML += html;
   });
+  keyboardClickEventListener();
+};
+
+const keyboardClickEventListener = () => {
+  const allLetters = keyboard.querySelectorAll(".letter.unhit");
+  allLetters.forEach((e) =>
+    e.addEventListener("click", (input) => {
+      checkLetter(input.target.textContent);
+    })
+  );
 };
 
 const blankBoard = () => {
@@ -311,13 +325,6 @@ window.addEventListener("DOMContentLoaded", () => {
     window.localStorage.getItem("shareData") || "N/A";
 
   showStatsData();
-
-  const allLetters = keyboard.querySelectorAll(".letter.unhit");
-  allLetters.forEach((e) =>
-    e.addEventListener("click", (input) => {
-      checkLetter(input.target.textContent);
-    })
-  );
 
   document.addEventListener("keyup", (input) => {
     let pattern = /[A-Z]/;
