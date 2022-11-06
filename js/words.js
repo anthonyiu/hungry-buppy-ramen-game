@@ -138,6 +138,11 @@ const words = [
   "cereal",
   "fish pie",
   "french fries",
+  "cheesecake",
+  "apple crumble",
+  "dipping sauce",
+  "brown sauce",
+  "sourdough",
 ];
 
 const currentWord = () => {
