@@ -146,7 +146,7 @@ const words = [
 ];
 
 const currentWord = () => {
-  const startDate = new Date("2022-06-19");
+  const startDate = new Date("2023-02-03");
   startDate.setHours(0, 0, 0, 0);
   const today = new Date();
   today.setHours(0, 0, 0, 0);
